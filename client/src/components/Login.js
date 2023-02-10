@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import {useHistory} from "react-router-dom"
 import Signup from "./Signup";
+import Profile from "./Profile";
 
-function Login({setUser}){
+function Login({setUser, setIsSignedUp, setIsLoggedIn}){
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  // const history = useHistory();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -15,7 +19,10 @@ function Login({setUser}){
       body: JSON.stringify({ username, password }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => {
+          setUser(user)
+          setIsLoggedIn(true)
+        });
       }
     });
   }
@@ -23,7 +30,7 @@ function Login({setUser}){
 
   return (
     <div className="login_form">
-      Login:
+      <h3>Login:</h3>
       <form className='login_form' onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
       <input
@@ -39,13 +46,10 @@ function Login({setUser}){
       value={password}
       onChange={(e)=> setPassword(e.target.value)}
       />
-      <button>Login</button>
+      <button type='submit'>Login</button>
     </form>
     <label>Don't have an account?</label>
-    <a href='/signup'>
-      <button onClick={(e)=> <Signup/>}>Signup</button>
-    </a>
-
+    <button onClick={()=>setIsSignedUp(false)}>Signup</button>
     </div>
     
   )

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import Error from "../styles/Error";
+import { useHistory } from "react-router-dom";
 
-function Signup({setUser}){
+function Signup({setUser, setIsSignedUp}){
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [errors, setErrors] = useState([])
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -19,20 +22,25 @@ function Signup({setUser}){
       }),
     }).then((r) => {
       if (r.ok) {
-        console.log(r)
-        // debugger
         r.json().then((user) => {
-          console.log(user)
-          console.log(setUser)
-          setUser(user)});
+          setIsSignedUp(true)
+          setUser(user)
+        });
+      }
+      else {
+        r.json().then((err) => {
+          setErrors(err.error)});
       }
     });
+    setUsername('')
+    setPassword('')
+    setPasswordConfirmation('')
   }
 
   return(
     <div className="signup">
       <form className="signup_form" onSubmit={handleSubmit}>
-      <h1>Sign Up</h1>
+      <h3>Sign Up</h3>
         <label htmlFor="username">Username: </label>
         <input
           type="text"
@@ -55,9 +63,15 @@ function Signup({setUser}){
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
         <button type="submit">Sign Up</button>
+        {errors && errors.map((err => (
+          <p key={err}>{err}</p>
+        )))}
       </form>
+      Already have an account?
+      <button onClick={()=> setIsSignedUp(true)}>Login</button>
     </div>
   )
+
 }
 
 export default Signup;
