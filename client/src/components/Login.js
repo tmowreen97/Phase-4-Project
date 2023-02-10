@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import {useHistory} from "react-router-dom"
-import Signup from "./Signup";
-import Profile from "./Profile";
+import {Redirect} from "react-router-dom"
 
-function Login({setUser, setIsSignedUp, setIsLoggedIn}){
+
+function Login({setUser, setIsSignedUp, setIsLoggedIn, isLoggedIn}){
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  // const history = useHistory();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -26,6 +24,7 @@ function Login({setUser, setIsSignedUp, setIsLoggedIn}){
       }
     });
   }
+  if (isLoggedIn) return <Redirect to='/me'/>
 
 
   return (

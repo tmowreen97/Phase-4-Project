@@ -8,8 +8,7 @@ function Home( {setUser, setIsSignedUp, isSignedUp, isLoggedIn, setIsLoggedIn} )
     <div className="home_page">
       <h1>CRITIQUER</h1>
       <h3>Welcome to the Critiquer!</h3>
-      {isSignedUp ? <Login setUser={setUser} setIsSignedUp={setIsSignedUp} setIsLoggedIn={setIsLoggedIn}/> : <Signup setUser={setUser} setIsSignedUp={setIsSignedUp}/>}
-      {/* {isSignedUp && isLoggedIn ? <Profile/> : <Login setUser={setUser} setIsSignedUp={setIsSignedUp} setIsLoggedIn={setIsLoggedIn}/>} */}
+      {isSignedUp ? <Login setUser={setUser} setIsSignedUp={setIsSignedUp} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/> : <Signup setUser={setUser} setIsSignedUp={setIsSignedUp}/>}
     </div>
   )
 }

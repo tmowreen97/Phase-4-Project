@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Error from "../styles/Error";
-import { useHistory } from "react-router-dom";
 
 function Signup({setUser, setIsSignedUp}){
   const [username, setUsername] = useState('');
@@ -25,6 +23,7 @@ function Signup({setUser, setIsSignedUp}){
         r.json().then((user) => {
           setIsSignedUp(true)
           setUser(user)
+          alert('You signed up! Now login with your new username and password.')
         });
       }
       else {
