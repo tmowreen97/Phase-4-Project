@@ -30,10 +30,12 @@ function App() {
     <h1>CRITIQUER</h1>
         <>
         <NavBar user={user} setUser={setUser} />
-        <Profile user={user} />
         <main>
-          <Switch>
-            <Route path="/movies">
+          <Switch>      
+            <Route path="/me">
+              <Profile user={user} />
+            </Route>  
+            <Route exact path="/movies">
               <MovieList />
             </Route>
             {/* <Route path="/">

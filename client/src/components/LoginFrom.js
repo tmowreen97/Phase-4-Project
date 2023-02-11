@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Redirect, useHistory } from "react-router-dom";
 
 function LoginForm({setUser}){
   //Here is the loginform, which will only come up if showLogIn is true. If showLogin is true, that means there is no user currently and the site wants you to login. We pass in setUser so that we can set the user to the inputed value, then hiding this form and sending you to the user profile.
@@ -21,8 +22,10 @@ function LoginForm({setUser}){
       body: JSON.stringify({ username, password }),
     }).then((r) => {
       if (r.ok) {
-        debugger
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => {
+          setUser(user)
+          return <Redirect to="/me"/>
+        });
       } else {
         r.json().then((err) => {
           debugger

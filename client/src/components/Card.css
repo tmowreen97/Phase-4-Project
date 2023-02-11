@@ -1,0 +1,32 @@
+.card_body{
+  margin: 2rem
+}
+
+.grid{
+  display:grid;
+  height: 100%;
+  /* max-height: 200vh; */
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 40rem));
+  gap: 2rem;
+  justify-content: center;
+}
+
+.card_image{
+  height:max-content;
+  width:100%;
+  object-fit: cover;
+}
+
+
+
+.card{
+  height: auto;
+  width: auto-fit;
+  overflow: hidden;
+  box-shadow: 0 2px 20px;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+
+}
