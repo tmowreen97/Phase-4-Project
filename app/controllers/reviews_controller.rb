@@ -19,6 +19,11 @@ class ReviewsController < ApplicationController
     render json: review, status: :created
   end
 
+  def index
+    reviews = Review.all
+    render json: reviews, status: :ok
+  end
+
   private
 
   def review_params

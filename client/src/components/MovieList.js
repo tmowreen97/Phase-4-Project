@@ -1,14 +1,7 @@
 import { useEffect, useState } from "react";
 import MovieCards from "./MovieCards";
-function MovieList({user}){
-  const [movies, setMovies]= useState(null)
+function MovieList({user, movies}){
 
-  useEffect(() => {
-    // fetch all movies #index
-    fetch("/movies")
-    .then(resp => resp.json())
-    .then(data => setMovies(data))
-  }, []);
 
   console.log('movies', movies)
   console.log('user', user)

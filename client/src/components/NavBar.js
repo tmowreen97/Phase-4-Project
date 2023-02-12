@@ -1,5 +1,5 @@
 import React from "react";
-import { Link} from "react-router-dom";
+import { Link, Redirect} from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -26,12 +26,10 @@ function NavBar({ user, setUser }) {
         <Link to="/movies">Movies</Link>
       </ul>
       <ul>
-      <Link to={`/reviews/${user.id}`} user={user}>My Reviews</Link>
+      <Link to='/reviews' user={user}>My Reviews</Link>
       </ul>
       <ul>
-        <button as={Link} to="/new">
-          New Review
-        </button>
+      <Link to='/new-movie' user={user}>New Movie</Link>
       </ul>
       <ul>
         <button variant="outline" onClick={handleLogoutClick}>

@@ -4,8 +4,8 @@ function PopupNewForm(props){
 
   //Use state to keep track of new review, in review format. 
   const [newReview, setNewReview]= useState({
-    movie_id: '',
-    user_id: '',
+    movie_id: 0,
+    user_id: 0,
     comment: ''
   })
 
@@ -35,7 +35,7 @@ function PopupNewForm(props){
         type='text'
         value={newReview.comment}
         onChange={(e)=> setNewReview(prevState => {
-          return{...prevState, comment: e.target.value, movie_id: props.currentMovie.id, user_id: props.user.id }
+          return{...prevState, comment: e.target.value, movie_id: parseInt(props.currentMovie.id), user_id: parseInt(props.user.id) }
         })}
         />
         <button className="submit" type='submit' >Submit</button>
