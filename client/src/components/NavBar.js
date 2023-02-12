@@ -18,17 +18,14 @@ function NavBar({ user, setUser }) {
     <div>
       <nav className="nav">
       <ul>
+        <CustomLink href="/me">Profile</CustomLink>
+      </ul>
+      <ul>
         <CustomLink href="/movies">Movies</CustomLink>
       </ul>
       <ul>
         <CustomLink href="/my-reviews">My Reviews</CustomLink>
       </ul>
-      {/* <ul>
-        <CustomLink href="/add-edit-movie">Add/Edit Movie</CustomLink>
-      </ul> */}
-      {/* <ul>
-        <CustomLink href="/add-genre">Add Genre</CustomLink>
-      </ul> */}
       <ul>
         <button as={Link} to="/new">
           New Review

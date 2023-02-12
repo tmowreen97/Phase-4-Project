@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Profile from './components/Profile';
 import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 import MovieList from './components/MovieList';
+import MovieShow from './components/MovieShow';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -36,11 +37,11 @@ function App() {
               <Profile user={user} />
             </Route>  
             <Route exact path="/movies">
-              <MovieList />
+              <MovieList user={user} />
             </Route>
-            {/* <Route path="/">
-              <RecipeList />
-            </Route> */}
+            <Route path='/movies/:id'>
+              <MovieShow user={user}/>
+            </Route>
           </Switch>
         </main>
       </>

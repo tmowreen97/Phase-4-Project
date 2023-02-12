@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Card.css';
 import { Redirect } from 'react-router-dom';
+import MovieShow from './MovieShow';
+import { Link } from "react-router-dom";
 
-function MovieCards({movies}) {
+function MovieCards({movies, user}) {
 
   return (
     <div className="grid">
       {movies.map((movie)=> {
         return(
-          <Card movie={movie}/>
+          <Card user={user} movie={movie}/>
         )
       })}
       
@@ -18,12 +20,11 @@ function MovieCards({movies}) {
 
 export default MovieCards;
 
-function Card({movie}){
-  function handleMoreDetails(movie){
-    fetch(`/movies/${movie.id}`)
-    .then(r=> r.json())
-    .then(data => console.log(data))
-  }
+function Card({user, movie}){
+  const [currentMovie, setCurrentMovie]= useState(null)
+
+
+  console.log('currentMovie', currentMovie)
 
   return (
     <div className='card'>
@@ -33,7 +34,7 @@ function Card({movie}){
         <h4>{movie.rating.toFixed(1)} ⭐ | {movie.runtime} mins</h4>
         <p className='card_description'>{movie.description}</p>
       </div>
-      <button className='card_button' onClick={()=>handleMoreDetails(movie)}>More Details</button>
+      <Link className='card_button' to={`/movies/${movie.id}`} user={user}>More Details</Link>
     </div>
   )
 
