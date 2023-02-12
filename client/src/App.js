@@ -7,6 +7,7 @@ import Profile from './components/Profile';
 import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 import MovieList from './components/MovieList';
 import MovieShow from './components/MovieShow';
+import MyReviews from './components/MyReviews';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -32,7 +33,10 @@ function App() {
         <>
         <NavBar user={user} setUser={setUser} />
         <main>
-          <Switch>      
+          <Switch>
+            <Route path="/reviews/:id">
+              <MyReviews user={user}/>
+            </Route>   
             <Route path="/me">
               <Profile user={user} />
             </Route>  

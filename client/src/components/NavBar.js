@@ -14,17 +14,19 @@ function NavBar({ user, setUser }) {
     });
   }
 
+  console.log(user)
+
   return (
     <div>
       <nav className="nav">
       <ul>
-        <CustomLink href="/me">Profile</CustomLink>
+        <Link to="/me">Profile</Link>
       </ul>
       <ul>
-        <CustomLink href="/movies">Movies</CustomLink>
+        <Link to="/movies">Movies</Link>
       </ul>
       <ul>
-        <CustomLink href="/my-reviews">My Reviews</CustomLink>
+      <Link to={`/reviews/${user.id}`} user={user}>My Reviews</Link>
       </ul>
       <ul>
         <button as={Link} to="/new">
@@ -41,40 +43,17 @@ function NavBar({ user, setUser }) {
   )
 }
 
-
-// function NavBar(){
+// function CustomLink({ href, children}){
+//   const path= window.location.pathname
 //   return (
-//     <nav className="nav">
-//       <ul className="nav_selection">
-//         <CustomLink href="/">Home</CustomLink>
-//       </ul>
-//       <ul>
-//         <CustomLink href="/movies">Movies</CustomLink>
-//       </ul>
-//       <ul>
-//         <CustomLink href="/genres">Genres</CustomLink>
-//       </ul>
-//       <ul>
-//         <CustomLink href="/add-edit-movie">Add/Edit Movie</CustomLink>
-//       </ul>
-//       <ul>
-//         <CustomLink href="/add-genre">Add Genre</CustomLink>
-//       </ul>
-//     </nav>
+//     <li className={path === href ? "active" : ""}>
+//       <a href={href}>
+//         {children}
+//       </a>
+//     </li>
 //   )
+
 // }
-
-function CustomLink({ href, children}){
-  const path= window.location.pathname
-  return (
-    <li className={path === href ? "active" : ""}>
-      <a href={href}>
-        {children}
-      </a>
-    </li>
-  )
-
-}
 
 function ColorSchemesExample() {
   return (

@@ -6,10 +6,12 @@ import PopupNewForm from "./PopupNewForm";
 
 function MovieShow({user}){
 
+  //state values, keeps track of current movie on show page, and reviews attached to that movie.
+  //showNewReview state toggles new review edit popup form
   const [currentMovie, setCurrentMovie]= useState(null)
   const [currentReviews, setCurrentReviews] = useState(null)
+  const [showNewReview, setShowNewReview] = useState(false)
 
-  console.log(window.location.pathname)
   useEffect(()=>{
     fetch(`${window.location.pathname}`)
     .then(resp=>resp.json())
@@ -19,11 +21,8 @@ function MovieShow({user}){
     })
   },[])
 
-  const [showNewReview, setShowNewReview] = useState(false)
-  console.log('currentMovie', currentMovie)
-  console.log('currentReviews', currentReviews)
 
-
+  //when the 'New Review' button is clicked, showNewReview is switched to true and the popup form displays.
   function handleClick(){
     setShowNewReview(true)
   }
@@ -32,9 +31,6 @@ function MovieShow({user}){
     const updatedReviews= [...currentReviews, newReview]
     setCurrentReviews(updatedReviews)
   }
-
-
-  console.log('reviews, this is the page we want them to show up on!', currentReviews)
 
   return(
     currentMovie && currentReviews && <div className="movieShow">
@@ -45,8 +41,8 @@ function MovieShow({user}){
         <p className='card_description'>{currentMovie.description}</p>
         <button onClick={()=> handleClick()}>New Review</button>
         <PopupNewForm trigger={showNewReview} setTrigger={setShowNewReview} currentMovie={currentMovie} user={user} 
-        currentReviews={currentReviews} setCurrentReviews={setCurrentReviews} handleNewReview={handleNewReview}/>
-        <MovieReviews user ={user} currentMovie={currentMovie} setCurrentReviews={setCurrentReviews} currentReviews={currentReviews}/>
+        currentReviews={currentReviews} handleNewReview={handleNewReview}/>
+        <MovieReviews user ={user} setCurrentReviews={setCurrentReviews} currentReviews={currentReviews}/>
     </div>
 
   )
