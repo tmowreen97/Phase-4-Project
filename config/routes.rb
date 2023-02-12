@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :reviews, only:[:update]
+  resources :reviews, only:[:update, :destroy]
   # resources :users
   resources :movies, only: [:index, :create, :show]
   post "/login", to: "sessions#create"

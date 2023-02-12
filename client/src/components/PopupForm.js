@@ -13,11 +13,15 @@ function PopupForm(props){
       body: JSON.stringify({
         comment: newComment
       })
-    }
-    
-    )
+    })
     .then(resp => resp.json())
-    .then(data => props.setTrigger(false))
+    .then(data => {
+      props.handleEditReview(data)
+      props.setTrigger(false)
+    })
+
+    
+    //This isn't editing or rerendering the state for the reviews.. need to some how do that.
   }
 
   return(props.trigger)?(
