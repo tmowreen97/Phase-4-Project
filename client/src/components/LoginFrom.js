@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Profile from "./Profile";
 import { Redirect, useHistory } from "react-router-dom";
 
 function LoginForm({setUser}){
@@ -10,7 +11,6 @@ function LoginForm({setUser}){
 
   //Keep track of errors also
   const [errors, setErrors]=useState([])
-  console.log(errors)
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -24,11 +24,10 @@ function LoginForm({setUser}){
       if (r.ok) {
         r.json().then((user) => {
           setUser(user)
-          return <Redirect to="/me"/>
+          return (<Profile/>)
         });
       } else {
         r.json().then((err) => {
-          debugger
           setErrors(err.errors)
         });
       }

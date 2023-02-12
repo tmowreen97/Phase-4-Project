@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
-function PopupForm(props){
+function PopupEditForm(props){
   const [newComment, setNewComment]= useState('')
-  console.log(props.currentReview.id)
+
+  //Send PATCH request to update a specific review. This is our UPDATE action for reviews 
   function handleSubmit(e){
     e.preventDefault()
     fetch(`/reviews/${props.currentReview.id}`,{
@@ -16,15 +17,16 @@ function PopupForm(props){
     })
     .then(resp => resp.json())
     .then(data => {
+      //Callback function is in MovieReviews
+      //It updates the review state
+      //setTrigger back to false to close popup form
       props.handleEditReview(data)
       props.setTrigger(false)
     })
-
-    
-    //This isn't editing or rerendering the state for the reviews.. need to some how do that.
   }
 
-  return(props.trigger)?(
+
+  return((props.trigger)?(
     <div className="popup">
       <h4>Edit Review</h4>
       <form onSubmit={(e)=> handleSubmit(e)}>
@@ -37,7 +39,7 @@ function PopupForm(props){
         <button className="close" type='submit' >Close</button>
       </form>
     </div>
-  ) : ""
+  ) : "")
 }
 
-export default PopupForm;
+export default PopupEditForm;
