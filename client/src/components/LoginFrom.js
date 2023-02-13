@@ -24,7 +24,9 @@ function LoginForm({setUser}){
       if (r.ok) {
         r.json().then((user) => {
           setUser(user)
-          return (<Profile/>)
+
+          // return (<Profile/>)
+
         });
       } else {
         r.json().then((err) => {

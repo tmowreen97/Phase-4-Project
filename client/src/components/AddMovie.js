@@ -25,7 +25,16 @@ function AddMovie({handleAddMovie}){
     .then(resp=> resp.json())
     .then(newMovie => {
       handleAddMovie(newMovie)
-      return (<Redirect to="/movies"/>)
+      setNewMovieHash({
+        title: '',
+        year: 0,
+        image_url: '',
+        genre: '',
+        description: '',
+        rating: 0,
+        runtime: 0
+      })
+      alert(`You just added a new movie, ${newMovieHash.title}!` )
     })
   }
 

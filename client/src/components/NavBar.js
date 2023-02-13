@@ -20,16 +20,16 @@ function NavBar({ user, setUser }) {
     <div>
       <nav className="nav">
       <ul>
-        <Link to="/me">Profile</Link>
+        <CustomLink href="/me">Profile</CustomLink>
       </ul>
       <ul>
-        <Link to="/movies">Movies</Link>
+        <CustomLink href="/movies">Movies</CustomLink>
       </ul>
       <ul>
-      <Link to='/reviews' user={user}>My Reviews</Link>
+      <CustomLink href='/reviews' user={user}>My Reviews</CustomLink>
       </ul>
       <ul>
-      <Link to='/new-movie' user={user}>New Movie</Link>
+      <CustomLink href='/movies/new' user={user}>New Movie</CustomLink>
       </ul>
       <ul>
         <button variant="outline" onClick={handleLogoutClick}>
@@ -41,17 +41,17 @@ function NavBar({ user, setUser }) {
   )
 }
 
-// function CustomLink({ href, children}){
-//   const path= window.location.pathname
-//   return (
-//     <li className={path === href ? "active" : ""}>
-//       <a href={href}>
-//         {children}
-//       </a>
-//     </li>
-//   )
+function CustomLink({ href, children}){
+  const path= window.location.pathname
+  return (
+    <li className={path === href ? "active" : ""}>
+      <a href={href}>
+        {children}
+      </a>
+    </li>
+  )
 
-// }
+}
 
 function ColorSchemesExample() {
   return (

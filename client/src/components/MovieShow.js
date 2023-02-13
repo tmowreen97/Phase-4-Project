@@ -5,7 +5,6 @@ import MovieReviews from "./MovieReviews";
 import PopupNewForm from "./PopupNewForm";
 
 function MovieShow({user}){
-
   //state values, keeps track of current movie on show page, and reviews attached to that movie.
   //showNewReview state toggles new review edit popup form
   const [currentMovie, setCurrentMovie]= useState(null)
@@ -34,6 +33,7 @@ function MovieShow({user}){
 
   return(
     currentMovie && currentReviews && <div className="movieShow">
+      
         <img className='movie_image' src={currentMovie.image_url}/>
         <h2 className='movie_title'>{currentMovie.title}</h2>
         <h4>{currentMovie.rating.toFixed(1)} ⭐ | {currentMovie.runtime} mins</h4>

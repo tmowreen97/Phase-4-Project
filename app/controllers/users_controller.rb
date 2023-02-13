@@ -16,7 +16,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found_respons
   private 
 
   def user_params
-    params.permit(:username, :password, :password_confirmation)
+    params.permit(:username, :password, :password_confirmation, :bio)
   end
 
   def render_record_invalid_response(error_hash)
