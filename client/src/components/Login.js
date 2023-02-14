@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SignUpForm from "./SignupForm";
-import LoginForm from "./LoginForm";
+import LoginForm from "./LoginFrom";
 import {Redirect} from "react-router-dom"
 
 

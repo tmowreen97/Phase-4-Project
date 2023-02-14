@@ -85,7 +85,6 @@ function MovieShow({user}){
 
   return(
     currentMovie && currentReviews && <div className="movieShow">
-
         <MovieInfo currentMovie={currentMovie}/>
         <MovieReviews currentReviews={currentReviews} user={user} showEditMode={showEditMode} handleSubmit={handleSubmit} handleDelete={handleDelete}/>
         <PopupNewForm trigger={showNewReview} setTrigger={setShowNewReview} currentMovie={currentMovie} setCurrentReviews={setCurrentReviews} currentReviews={currentReviews} user={user} 
