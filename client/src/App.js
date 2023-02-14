@@ -33,16 +33,6 @@ function App() {
     .then(data => setMovies(data))
   }, []);
 
-  function handleAddMovie(newMovie){
-    const updatedMovies= [...movies, newMovie]
-    setMovies(updatedMovies)  
-    return (<Redirect to="/movies"/>)
-  }
-
-  function isObjEmpty (obj) {
-    return Object.keys(obj).length === 0;
-  }
-  // if (isObjEmpty(user)) return <Login setUser={setUser} />;
 
   if (!user) return <Login setUser={setUser} />;
 
@@ -61,7 +51,7 @@ function App() {
             <Profile user={user}/>
           </Route>   
           <Route path="/movies/new">
-            <AddMovie handleAddMovie={handleAddMovie}/>
+            <AddMovie/>
           </Route>  
           <Route path="/me">
           </Route>  

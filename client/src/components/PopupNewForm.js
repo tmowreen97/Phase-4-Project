@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+//Rendered in MovieShow.js
 function PopupNewForm(props){
 
   //Use state to keep track of new review, in review format. 
@@ -12,6 +12,7 @@ function PopupNewForm(props){
   //submit function that creates new review in database. After the request, passes the new data to callback function in MovieShow component, and sets popup trigger to false to hide the form.
   function handleSubmit(e){
     e.preventDefault()
+    const updatedReviews=[]
     fetch('/reviews', {
       method: "POST",
       headers: {
@@ -23,6 +24,10 @@ function PopupNewForm(props){
     .then(data=> {
       props.setTrigger(false)
       props.handleNewReview(data)
+      setNewReview({
+        movie_id: 0,
+        user_id: 0,
+        comment: ''})
     }
       )
   }

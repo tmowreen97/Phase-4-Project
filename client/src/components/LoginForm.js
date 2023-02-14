@@ -24,9 +24,6 @@ function LoginForm({setUser}){
       if (r.ok) {
         r.json().then((user) => {
           setUser(user)
-
-          // return (<Profile/>)
-
         });
       } else {
         r.json().then((err) => {
@@ -47,11 +44,14 @@ function LoginForm({setUser}){
       />
       <label>Password: </label>
       <input
-      type='text'
+      type='password'
       value={password}
       onChange={(e)=>setPassword(e.target.value)}
       />
       <button type='submit'>Login</button>
+      {errors && errors.map((err => (
+            <p key={err}>{err}</p>
+      )))} 
     </form>
   )
 }

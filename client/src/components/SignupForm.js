@@ -13,7 +13,6 @@ function SignUpForm({setUser}){
   
     //Set state for errors
     const [errors, setErrors] = useState([])
-    console.log(errors)
 
     function handleSubmit(e) {
       e.preventDefault();

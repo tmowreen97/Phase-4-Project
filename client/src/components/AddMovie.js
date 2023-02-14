@@ -12,9 +12,11 @@ function AddMovie({handleAddMovie}){
     rating: 0,
     runtime: 0
   })
+  const [errors, setErrors] = useState([])
   console.log('newMovie', newMovieHash)
   function handleSubmit(e){
-    e.preventDefault()
+    e.preventDefault();
+    setErrors([]);
     fetch('/movies', {
       method: "POST",
       headers: {
@@ -22,19 +24,26 @@ function AddMovie({handleAddMovie}){
       },
       body: JSON.stringify(newMovieHash)
     })
-    .then(resp=> resp.json())
-    .then(newMovie => {
-      handleAddMovie(newMovie)
-      setNewMovieHash({
-        title: '',
-        year: 0,
-        image_url: '',
-        genre: '',
-        description: '',
-        rating: 0,
-        runtime: 0
-      })
-      alert(`You just added a new movie, ${newMovieHash.title}!` )
+    .then(resp=> {
+      if (resp.ok) {
+        resp.json().then(newMovie => {
+          handleAddMovie(newMovie)
+          setNewMovieHash({
+            title: '',
+            year: 0,
+            image_url: '',
+            genre: '',
+            description: '',
+            rating: 0,
+            runtime: 0
+          })
+          alert(`You just added a new movie, ${newMovieHash.title}!` )
+        })
+      } else {
+        resp.json().then(err => {
+          setErrors(err.error)
+        })
+      }
     })
   }
 
@@ -117,7 +126,11 @@ function AddMovie({handleAddMovie}){
             return {...prevState, runtime: e.target.value}
           })}        /> 
         </ul>
+        {errors && errors.map((err => (
+            <p key={err}>{err}</p>
+          )))} 
         <button>Submit Movie</button>
+   
       </form>
     </div>
     
