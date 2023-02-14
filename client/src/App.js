@@ -5,10 +5,12 @@ import AddMovie from './components/AddMovie';
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import Login from './components/Login';
 import Profile from './components/Profile';
-import { Switch, Route, useHistory, Redirect  } from "react-router-dom";
 import MovieList from './components/MovieList';
 import MovieShow from './components/MovieShow';
 import MyReviews from './components/MyReviews';
+import { Switch} from 'react-router-dom';
+
+
 const UserContext = createContext();
 
 function App() {
@@ -43,7 +45,7 @@ function App() {
     <h1>CRITIQUER</h1>
         <>
         <NavBar user={user} setUser={setUser} />
-        <Switch> 
+        <Switch>
           <Route path="/reviews">
             <MyReviews user={user}/>
           </Route>   
