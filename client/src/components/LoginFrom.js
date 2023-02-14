@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect, useHistory, useNavigate } from "react-router-dom";
 
 function LoginForm({setUser}){
   //Here is the loginform, which will only come up if showLogIn is true. If showLogin is true, that means there is no user currently and the site wants you to login. We pass in setUser so that we can set the user to the inputed value, then hiding this form and sending you to the user profile.
@@ -7,6 +7,7 @@ function LoginForm({setUser}){
   //State values keeping track of user login info
   const [username, setUsername]= useState('')
   const [password, setPassword]=useState('')
+  const navigate = useNavigate()
 
   //Keep track of errors also
   const [errors, setErrors]=useState([])
@@ -23,6 +24,8 @@ function LoginForm({setUser}){
       if (r.ok) {
         r.json().then((user) => {
           setUser(user)
+          navigate("/reviews")
+         
         });
       } else {
         r.json().then((err) => {

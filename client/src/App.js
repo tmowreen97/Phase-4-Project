@@ -40,16 +40,17 @@ function App() {
 
 
   return(
-    <UserContext.Provider value={user}>
+    // <UserContext.Provider value={user}>
     <div className='home'>
     <h1>CRITIQUER</h1>
         <>
         <NavBar user={user} setUser={setUser} />
         <Routes>
-          <Route path="/reviews">
-            <MyReviews user={user}/>
-          </Route>   
-          <Route path="/me">
+          <Route path="/reviews" element= {<MyReviews user={user}/>}/>
+
+
+
+          {/* <Route path="/me">
             <Profile user={user}/>
           </Route>   
           <Route path="/movies/new">
@@ -62,11 +63,10 @@ function App() {
           </Route>
           <Route path='/movies/:id'>
             <MovieShow user={user}/>
-          </Route>
+          </Route> */}
         </Routes>
       </>
     </div>
-    </UserContext.Provider>
     
   )
 }
