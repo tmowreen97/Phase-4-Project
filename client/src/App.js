@@ -8,7 +8,7 @@ import Profile from './components/Profile';
 import MovieList from './components/MovieList';
 import MovieShow from './components/MovieShow';
 import MyReviews from './components/MyReviews';
-import { Switch} from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 
 
 const UserContext = createContext();
@@ -45,7 +45,7 @@ function App() {
     <h1>CRITIQUER</h1>
         <>
         <NavBar user={user} setUser={setUser} />
-        <Switch>
+        <Routes>
           <Route path="/reviews">
             <MyReviews user={user}/>
           </Route>   
@@ -63,7 +63,7 @@ function App() {
           <Route path='/movies/:id'>
             <MovieShow user={user}/>
           </Route>
-        </Switch>
+        </Routes>
       </>
     </div>
     </UserContext.Provider>
