@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Profile from "./Profile";
 import { Redirect, useHistory } from "react-router-dom";
 
 function LoginForm({setUser}){
