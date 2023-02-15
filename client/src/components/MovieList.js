@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
-import MovieCards from "./MovieCards";
-function MovieList({user, movies}){
 
+import MovieCards from "./MovieCards";
+import { useContext } from "react";
+import { UserContext } from "../App.js";
+
+function MovieList({movies}){
+  const user = useContext(UserContext);
 
   console.log('movies', movies)
   console.log('user', user)
@@ -9,7 +12,7 @@ function MovieList({user, movies}){
   return(
     <div className="movie_list">
       <h2>List of all the movies:</h2>
-      {movies && <MovieCards user={user} movies={movies}/>}
+      {movies && <MovieCards movies={movies}/>}
     </div>
     
   )

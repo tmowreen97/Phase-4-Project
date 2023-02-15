@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react"
-function MyReviews({user}){
-  
+import { useContext } from "react";
+import { UserContext } from "../App.js";
+
+ 
+function MyReviews(){
+  const user = useContext(UserContext);
   console.log(user)
 
   return (
     <div className="flex_container">
       <div>
-        <h4>My Reviews</h4>
+        <h4>My Reviews:</h4>
       { 
         user.reviews.map((review)=> {
           return(

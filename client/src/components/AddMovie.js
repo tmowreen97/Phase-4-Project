@@ -66,6 +66,7 @@ function AddMovie({movies, setMovies}){
         <input
           type = 'text'
           value = {newMovieHash.title}
+          placeholder="Title"
           onChange={(e)=> setNewMovieHash(prevState => {
             return {...prevState, title: e.target.value}
           })}
@@ -76,6 +77,9 @@ function AddMovie({movies, setMovies}){
         <input
           type = 'number'
           value = {newMovieHash.year}
+          min="0" 
+          max="2023"
+          placeholder="Year"
           onChange={(e)=> setNewMovieHash(prevState => {
             return {...prevState, year: parseFloat(e.target.value)}
           })}
@@ -86,6 +90,7 @@ function AddMovie({movies, setMovies}){
         <input
           type = 'text'
           value = {newMovieHash.image_url}
+          placeholder="Image URL"
           onChange={(e)=> setNewMovieHash(prevState => {
             return {...prevState, image_url: e.target.value}
           })}
@@ -112,6 +117,7 @@ function AddMovie({movies, setMovies}){
         <input
           type = 'text'
           value = {newMovieHash.description}
+          placeholder="Description"
           onChange={(e)=> setNewMovieHash(prevState => {
             return {...prevState, description: e.target.value}
           })}
@@ -121,9 +127,11 @@ function AddMovie({movies, setMovies}){
         <label>Rating: </label>
         <input
           type = 'number'
-          placeholder=""
           value = {newMovieHash.rating}
           step='.1'
+          min="0" 
+          max="10"
+          placeholder="Rating"
           onChange={(e)=> setNewMovieHash(prevState => {
             return {...prevState, rating: parseFloat(e.target.value)}})}
           // onChange={(e)=> setNewMovieHash(prevState => {
@@ -136,6 +144,8 @@ function AddMovie({movies, setMovies}){
         <input
           type = 'number'
           value = {newMovieHash.runtime}
+          min="0" 
+          placeholder="Runtime"
           onChange={(e)=> setNewMovieHash(prevState => {
             return {...prevState, runtime: parseFloat(e.target.value)}
           })}        

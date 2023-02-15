@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import './Card.css';
-import { Redirect } from 'react-router-dom';
-import MovieShow from './MovieShow';
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../App.js";
 
-function MovieCards({movies, user}) {
 
-  const [currentMovie, setCurrentMovie]= useState(null)
+
+function MovieCards({movies}) {
+  const user = useContext(UserContext);
   const [currentReviews, setCurrentReviews] = useState('')
+
 
   return (
     <div className="grid">

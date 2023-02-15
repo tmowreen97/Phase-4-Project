@@ -36,12 +36,21 @@ function SignUpForm({setUser}){
         r.json().then((user) => {
           setUser(user)
           navigate("/home")
+          setUsername('')
+          setPassword('')
+          setPasswordConfirmation('')
+          setBio('')
+
           
         });
       } else {
         r.json().then((err) => 
         {
           setErrors(err.error)
+          setUsername('')
+          setPassword('')
+          setPasswordConfirmation('')
+          setBio('')
         }
         );
       }

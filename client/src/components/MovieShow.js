@@ -2,8 +2,13 @@
 
 import { useEffect, useState } from "react";
 import PopupNewForm from "./PopupNewForm";
+import { useContext } from "react";
+import { UserContext } from "../App.js";
 
-function MovieShow({user, reviews, setReviews }){
+
+
+function MovieShow(){
+  const user = useContext(UserContext);
   //state values, keeps track of current movie on show page, and reviews attached to that movie.
   //showNewReview state toggles new review edit popup form
   const [currentMovie, setCurrentMovie]= useState(null)
@@ -78,7 +83,7 @@ function MovieShow({user, reviews, setReviews }){
 
   function handleNewReview(newReview){
     const updatedReviews = [...currentReviews]
-    updatedReviews.push(newReview)
+    updatedReviews.unshift(newReview)
     setCurrentReviews(updatedReviews)
   }
 
@@ -89,6 +94,7 @@ function MovieShow({user, reviews, setReviews }){
       currentMovie && currentReviews &&
       <>
         <MovieInfo currentMovie={currentMovie}/>
+        <h5>Reviews:</h5>
         <MovieReviews currentReviews={currentReviews} user={user} showEditMode={showEditMode} handleSubmit={handleSubmit} handleDelete={handleDelete}/>
         <PopupNewForm trigger={showNewReview} setTrigger={setShowNewReview} currentMovie={currentMovie} setCurrentReviews={setCurrentReviews} currentReviews={currentReviews} user={user} 
         handleNewReview={handleNewReview}  />      

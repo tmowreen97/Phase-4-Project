@@ -49,13 +49,13 @@ function App() {
       <div className='home'>
       <h1>CRITIQUER</h1>
           <>
-          <NavBar user={user} setUser={setUser} />
+          <NavBar setUser={setUser} />
           <Routes>
-            <Route path="/reviews" element= {<MyReviews user={user}/>}/>
+            <Route path="/reviews" element= {<MyReviews/>}/>
             <Route path="/home" element= {<Profile/>}/>
             <Route path="/movies/new" element= {<AddMovie movies={movies} setMovies={setMovies}/>}/>
-            <Route path="/movies" element= {<MovieList user={user} movies={movies}/>}/>
-            <Route path="/movies/:id" element= {<MovieShow  user={user}/>}/>
+            <Route path="/movies" element= {<MovieList movies={movies}/>}/>
+            <Route path="/movies/:id" element= {<MovieShow/>}/>
             <Route path="/reviews/all" element= {<AllReviews/>}/>
           </Routes>
         </>
