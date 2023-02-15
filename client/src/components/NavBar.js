@@ -1,32 +1,38 @@
-import React from "react";
-import { Link, Redirect} from "react-router-dom";
+import {React, useContext} from "react";
+import { useNavigate} from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { UserContext } from "../App.js";
 
 
-function NavBar({ user, setUser }) {
+function NavBar({ setUser }) {
+  const navigate = useNavigate()
+  const user = useContext(UserContext);
+
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
         setUser(null);
+        navigate("/")
       }
     });
   }
-
-  console.log(user)
 
   return (
     <div>
       <nav className="nav">
       <ul>
-        <CustomLink href="/me">Profile</CustomLink>
+        <CustomLink href="/home">Profile</CustomLink>
       </ul>
       <ul>
         <CustomLink href="/movies">Movies</CustomLink>
       </ul>
       <ul>
       <CustomLink href='/reviews' user={user}>My Reviews</CustomLink>
+      </ul>
+      <ul>
+      <CustomLink href='/reviews/all' user={user}>All Reviews</CustomLink>
       </ul>
       <ul>
       <CustomLink href='/movies/new' user={user}>New Movie</CustomLink>

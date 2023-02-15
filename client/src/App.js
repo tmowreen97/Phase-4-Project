@@ -1,6 +1,5 @@
 import './App.css';
 import NavBar from './components/NavBar';
-import Home from './components/Home';
 import AddMovie from './components/AddMovie';
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import Login from './components/Login';
@@ -8,14 +7,16 @@ import Profile from './components/Profile';
 import MovieList from './components/MovieList';
 import MovieShow from './components/MovieShow';
 import MyReviews from './components/MyReviews';
-import { Routes, Route} from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom'
+import AllReviews from './components/AllReviews';
 
 
-const UserContext = createContext();
+export const UserContext = createContext();
 
 function App() {
   const [user, setUser] = useState(null);
-  const [movies, setMovies]= useState(null) 
+  const [movies, setMovies]= useState('') 
+
 
 
   useEffect(() => {
@@ -36,37 +37,30 @@ function App() {
   }, []);
 
 
+
+
+
+
   if (!user) return <Login setUser={setUser} />;
 
 
   return(
-    // <UserContext.Provider value={user}>
-    <div className='home'>
-    <h1>CRITIQUER</h1>
-        <>
-        <NavBar user={user} setUser={setUser} />
-        <Routes>
-          <Route path="/reviews" element= {<MyReviews user={user}/>}/>
-
-
-
-          {/* <Route path="/me">
-            <Profile user={user}/>
-          </Route>   
-          <Route path="/movies/new">
-            <AddMovie/>
-          </Route>  
-          <Route path="/me">
-          </Route>  
-          <Route exact path="/movies">
-            <MovieList movies={movies} user={user} />
-          </Route>
-          <Route path='/movies/:id'>
-            <MovieShow user={user}/>
-          </Route> */}
-        </Routes>
-      </>
-    </div>
+    <UserContext.Provider value={user}>
+      <div className='home'>
+      <h1>CRITIQUER</h1>
+          <>
+          <NavBar user={user} setUser={setUser} />
+          <Routes>
+            <Route path="/reviews" element= {<MyReviews user={user}/>}/>
+            <Route path="/home" element= {<Profile/>}/>
+            <Route path="/movies/new" element= {<AddMovie movies={movies} setMovies={setMovies}/>}/>
+            <Route path="/movies" element= {<MovieList user={user} movies={movies}/>}/>
+            <Route path="/movies/:id" element= {<MovieShow  user={user}/>}/>
+            <Route path="/reviews/all" element= {<AllReviews/>}/>
+          </Routes>
+        </>
+      </div>
+    </UserContext.Provider>
     
   )
 }

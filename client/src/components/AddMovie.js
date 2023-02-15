@@ -1,22 +1,28 @@
 import { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function AddMovie({handleAddMovie}){
+function AddMovie({movies, setMovies}){
   // ['Action', 'Comedy', 'Documentary','Drama','Horror', 'Musical', 'Romance','Thriller'] 
   const [newMovieHash, setNewMovieHash] = useState({
     title: '',
-    year: 0,
+    year: '',
     image_url: '',
     genre: '',
     description: '',
-    rating: 0,
-    runtime: 0
+    rating: '',
+    runtime: ''
   })
+  const [rating, setRating] = useState('')
   const [errors, setErrors] = useState([])
-  console.log('newMovie', newMovieHash)
+  const navigate = useNavigate()
+  console.log(newMovieHash)
+
+
   function handleSubmit(e){
     e.preventDefault();
     setErrors([]);
+    const updatedMovies = [...movies]
+    // updatedMovies.push(movies)
     fetch('/movies', {
       method: "POST",
       headers: {
@@ -27,7 +33,7 @@ function AddMovie({handleAddMovie}){
     .then(resp=> {
       if (resp.ok) {
         resp.json().then(newMovie => {
-          handleAddMovie(newMovie)
+          updatedMovies.push(newMovie)
           setNewMovieHash({
             title: '',
             year: 0,
@@ -37,7 +43,10 @@ function AddMovie({handleAddMovie}){
             rating: 0,
             runtime: 0
           })
+          setMovies(updatedMovies)
           alert(`You just added a new movie, ${newMovieHash.title}!` )
+          navigate("/movies")
+          
         })
       } else {
         resp.json().then(err => {
@@ -46,6 +55,7 @@ function AddMovie({handleAddMovie}){
       }
     })
   }
+  console.log('movies', newMovieHash)
 
   return(
     <div className="add_movie">
@@ -67,7 +77,7 @@ function AddMovie({handleAddMovie}){
           type = 'number'
           value = {newMovieHash.year}
           onChange={(e)=> setNewMovieHash(prevState => {
-            return {...prevState, year: e.target.value}
+            return {...prevState, year: parseFloat(e.target.value)}
           })}
         />   
         </ul>
@@ -111,11 +121,15 @@ function AddMovie({handleAddMovie}){
         <label>Rating: </label>
         <input
           type = 'number'
+          placeholder=""
           value = {newMovieHash.rating}
+          step='.1'
           onChange={(e)=> setNewMovieHash(prevState => {
-            return {...prevState, rating: e.target.value}
-          })}
-        />     
+            return {...prevState, rating: parseFloat(e.target.value)}})}
+          // onChange={(e)=> setNewMovieHash(prevState => {
+          //   return {...prevState, rating: (e.target.value).toFixed(1)}
+          // })}
+        /> /10
         </ul>
         <ul>
         <label>Runtime: </label>
@@ -123,8 +137,9 @@ function AddMovie({handleAddMovie}){
           type = 'number'
           value = {newMovieHash.runtime}
           onChange={(e)=> setNewMovieHash(prevState => {
-            return {...prevState, runtime: e.target.value}
-          })}        /> 
+            return {...prevState, runtime: parseFloat(e.target.value)}
+          })}        
+        /> mins
         </ul>
         {errors && errors.map((err => (
             <p key={err}>{err}</p>

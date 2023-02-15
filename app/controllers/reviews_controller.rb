@@ -24,6 +24,12 @@ class ReviewsController < ApplicationController
     render json: reviews, status: :ok
   end
 
+  # def show
+  #   reviews = Review.where(`user_id = #{session[:user_id]}`)
+  #   render json: reviews, status: :ok
+  # end
+
+
   private
 
   def review_params

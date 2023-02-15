@@ -12,7 +12,8 @@ function PopupNewForm(props){
   //submit function that creates new review in database. After the request, passes the new data to callback function in MovieShow component, and sets popup trigger to false to hide the form.
   function handleSubmit(e){
     e.preventDefault()
-    const updatedReviews=[]
+    console.log('new review',newReview)
+    console.log(props.currentReviews)
     fetch('/reviews', {
       method: "POST",
       headers: {
@@ -31,6 +32,7 @@ function PopupNewForm(props){
     }
       )
   }
+
   //If the trigger is true, it will display the New Review Form. If it's false, it'll be an empty string.
   return((props.trigger)?(
     <div className="popup">

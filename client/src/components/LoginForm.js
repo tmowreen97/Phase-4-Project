@@ -24,18 +24,22 @@ function LoginForm({setUser}){
       if (r.ok) {
         r.json().then((user) => {
           setUser(user)
-          navigate("/reviews")
-         
+          setUsername('')
+          setPassword('')
+          navigate("/home")
         });
       } else {
         r.json().then((err) => {
-          setErrors(err.errors)
+          // debugger
+          setErrors(err.error)
+          setUsername('')
+          setPassword('')
         });
       }
     });
   }
 
-
+  // debugger
   return (
     <form onSubmit={handleSubmit}>
       <label>Username: </label>
@@ -51,9 +55,7 @@ function LoginForm({setUser}){
       onChange={(e)=>setPassword(e.target.value)}
       />
       <button type='submit'>Login</button>
-      {errors && errors.map((err => (
-            <p key={err}>{err}</p>
-      )))} 
+    {errors && <p className="error">{errors}</p>}
     </form>
   )
 }

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import PopupNewForm from "./PopupNewForm";
 
-function MovieShow({user}){
+function MovieShow({user, reviews, setReviews }){
   //state values, keeps track of current movie on show page, and reviews attached to that movie.
   //showNewReview state toggles new review edit popup form
   const [currentMovie, setCurrentMovie]= useState(null)
@@ -12,6 +12,7 @@ function MovieShow({user}){
   const [showEditMode, setShowEditMode] = useState(false)
 
   useEffect(()=>{
+    console.log(`${window.location.pathname}`)
     fetch(`${window.location.pathname}`)
     .then(resp=>resp.json())
     .then(current => {
@@ -19,6 +20,7 @@ function MovieShow({user}){
       setCurrentReviews(current.reviews)
     })
   },[])
+
 
   //when the 'New Review' button is clicked, showNewReview is switched to true and the popup form displays.
   function handleClick(){
@@ -48,7 +50,6 @@ function MovieShow({user}){
     })
     .then(resp=>resp.json())
     .then(data=> {
-      debugger
       updatedReviews.unshift(data)
       setCurrentReviews(updatedReviews)
       setShowEditMode(!showEditMode)
@@ -79,19 +80,26 @@ function MovieShow({user}){
     const updatedReviews = [...currentReviews]
     updatedReviews.push(newReview)
     setCurrentReviews(updatedReviews)
-    
   }
 
 
   return(
-    currentMovie && currentReviews && <div className="movieShow">
+    <div className="movieShow">
+    {
+      currentMovie && currentReviews &&
+      <>
         <MovieInfo currentMovie={currentMovie}/>
         <MovieReviews currentReviews={currentReviews} user={user} showEditMode={showEditMode} handleSubmit={handleSubmit} handleDelete={handleDelete}/>
         <PopupNewForm trigger={showNewReview} setTrigger={setShowNewReview} currentMovie={currentMovie} setCurrentReviews={setCurrentReviews} currentReviews={currentReviews} user={user} 
-        handleNewReview={handleNewReview}/>      
+        handleNewReview={handleNewReview}  />      
         <button onClick={()=> handleClick()}>{showNewReview ? 'Close' : 'New Review'}</button>
         <button onClick={()=> handleEditClick()}>{showEditMode ? 'Close' : 'Edit Mode'}</button>
+      </>
+
+    }
     </div>
+
+    
 
   )
 }
@@ -113,7 +121,7 @@ function MovieInfo({currentMovie}){
 function MovieReviews({currentReviews, user,  showEditMode, handleSubmit, handleDelete}){
   return(
     <div className="movie_reviews">
-      {currentReviews.map((review)=>{
+      {currentReviews && currentReviews.map((review)=>{
         return(
           <>
             <p className="movie_comment">{review.comment} -@{review.user.username}</p>
