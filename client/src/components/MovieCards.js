@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useNavigate } from 'react';
 import './Card.css';
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../App.js";
+import MovieShow from "./MovieShow.js"
 
 
 
 function MovieCards({movies}) {
   const user = useContext(UserContext);
+  // const navigate = useNavigate();
   const [currentReviews, setCurrentReviews] = useState('')
 
 
@@ -23,7 +25,7 @@ function MovieCards({movies}) {
             <h4>{movie.rating.toFixed(1)} ⭐ | {movie.runtime} mins</h4>
             <p className='card_description'>{movie.description}</p>
           </div>
-          <Link className='card_button' to={`/movies/${movie.id}`} user={user} currentReviews={currentReviews} setCurrentReviews={setCurrentReviews}>Show Movie Details</Link>
+          <Link className='card_button' to={`/movies/${movie.id}`} user={user} currentReviews={currentReviews} setCurrentReviews={setCurrentReviews}>More Details</Link>
         </div>
         )
       })}

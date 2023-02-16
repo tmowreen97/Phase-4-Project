@@ -57,10 +57,9 @@ function SignUpForm({setUser}){
     });
   }
   return(
-    <div className="signup">
-      <form className="signup_form" onSubmit={handleSubmit}>
-      <h3>Sign Up Form</h3>
-      <ul>
+    <div >
+      <form onSubmit={handleSubmit}>
+      <h2 className="signup_title">Sign Up</h2>
         <label htmlFor="username">Username: </label>
         <input
           type="text"
@@ -69,8 +68,6 @@ function SignUpForm({setUser}){
           placeholder="Enter username"
           onChange={(e) => setUsername(e.target.value)}
         />
-      </ul>
-      <ul>
         <label htmlFor="password">Password: </label>
         <input
           type="password"
@@ -79,8 +76,6 @@ function SignUpForm({setUser}){
           placeholder="Enter password"
           onChange={(e) => setPassword(e.target.value)}
         />          
-      </ul>
-      <ul>
         <label htmlFor="password">Password Confirmation: </label>
         <input
           type="password"
@@ -89,8 +84,6 @@ function SignUpForm({setUser}){
           placeholder="Enter password again"
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />          
-      </ul>
-      <ul>
         <label>Bio:</label>
         <input
 
@@ -99,14 +92,10 @@ function SignUpForm({setUser}){
         placeholder="Tell us about yourself!"
         onChange={(e)=>setBio(e.target.value)}
         />
-      </ul>
-      <ul>
-        <button type="submit">Sign Up</button>
+        <button className="signup_button" type="submit">Sign Up</button>
         {errors && errors.map((err => (
-          <p key={err}>{err}</p>
-        )))}          
-      </ul>
-      
+          <p className="error" key={err}>{err}</p>
+        )))}               
       </form>
 
     </div>

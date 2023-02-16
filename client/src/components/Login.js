@@ -13,29 +13,30 @@ function Login({setUser}){
   console.log('onLogIn, which is equal to setUser', setUser)
 
   return (
-    <div className="login">
-      <h1>CRITIQUER</h1>
+    <div>
+      <h1 className="load_title" >CRITIQUER</h1>
+      <p className="load_summary">HOME OF THE MOVIE CRITICS</p>
       {showLogin ? (
-        <>
+        <div className="login_form">
           <LoginForm setUser={setUser} />
-          <p>
+          <p className="no_account">
             Don't have an account? &nbsp;
-            <button onClick={() => setShowLogin(false)}>
+            <button className="signup_form_button" onClick={() => setShowLogin(false)}>
               Sign Up
             </button>
           </p>
-        </>
+        </div>
       ) : (
-        <>
+        <div className="signup_form">
           <SignUpForm setUser={setUser} />
 
-          <p>
+          <p className="has_account">
             Already have an account? &nbsp;
-            <button onClick={() => setShowLogin(true)}>
+            <button className="login_form_button" onClick={() => setShowLogin(true)}>
               Log In
             </button>
           </p>
-        </>
+        </div>
       )}
     </div>
       

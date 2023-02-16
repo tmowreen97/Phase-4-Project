@@ -1,5 +1,368 @@
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+
+/* NAV BAR */
+.nav {
+  background-color:lightgray;
+  color: aliceblue;
+  display:flex;
+  justify-content:space-around;
+  font-family:'Lora';
+  font-size: 105%;
+  font-weight: 700;
+  padding-top: 10px;
+  text-shadow: -0.5px -0.5px 0 darkgray;
+  /* text-shadow: 2px 2px darkgray;
+  text-decoration:outline; */
 }
+
+.nav ul{
+  list-style: none;
+  display: flex;
+  text-align: center;
+  /* padding: .70rem; */
+}
+
+.nav a{
+  color: inherit;
+  text-decoration:none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: .30rem;
+}
+
+.nav a:hover{
+  background-color: darkgray;
+  color:black;
+}
+
+.active{
+  color:black;
+}
+
+/* PROFILE */
+
+.title{
+  font-family: "Lora", italic;
+  font-weight: 500;
+  font-style: italic;
+  font-size:700%;
+}
+
+.profile{
+  font-family:"Jost";
+  margin-left:50px;
+  padding-left: 40px;
+  padding-top: 20px;
+}
+.welcome{
+  font-family:"Jost";
+  font-style:italic;
+  font-weight: 500;
+  padding-left:20px
+}
+
+.bio, .page_summary{
+  padding-right:50%;
+  font-size: 110%;
+  padding-left:20px
+}
+
+/* MOVIES */
+
+.movie_list_title{
+  font-family: "Jost";
+  background-color: silver;
+  padding-top:15px;
+  padding-bottom: 15px;
+  text-align:center;
+}
+
+/* MY REVIEWS */
+
+.flex_container{
+  font-family:"Jost";
+  display: flex;
+  margin-left: 15%;
+  /* margin-right:15%; */
+  margin-top:50px;
+  margin-right: 15%
+}
+
+.my_reviews{
+  flex: 1;
+  padding:20px;
+  margin-right:10px;
+  background-color: lightgray;
+  list-style-type: square;
+}
+.my_movies{
+  flex: 1;
+  padding:20px;
+  background-color: lightgray;
+  /* padding: 50px; */
+}
+
+.my_reviews_title, .my_movies_title{
+  font-family: "Jost"
+}
+
+.movie_list, .my_review_list{
+  list-style-type: square;
+}
+
+/* ALL REVIEWS */
+.all_reviews{
+  font-family:"Jost"
+}
+.all_reviews_title{
+  font-family: "Jost";
+  background-color: silver;
+  padding-top:15px;
+  padding-bottom: 15px;
+  margin-bottom: 40px;
+  text-align:center;
+}
+
+.review_list{
+  padding:30px;
+  margin-left: 10%;
+  margin-right: 10%;
+  background-color:gainsboro;
+  opacity:.9;
+  margin-bottom:40px;
+  list-style-type: square;
+}
+
+/* ADD MOVIE */
+
+.add_movie_title{
+  font-family: "Jost";
+  background-color: silver;
+  padding-top:15px;
+  padding-bottom: 15px;
+  margin-bottom: 40px;
+  text-align:center;
+}
+
+input[type=text], input[type=password], input[type=number], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+} 
+
+.submit_movie_button {
+  width: 100%;
+  text-align:center;
+  background-color: white;
+  color: black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit_movie_button:hover {
+  background-color: darkgray;
+  color: black;
+}
+
+.add_movie_form{
+  font-family: "Jost";
+  color: black;
+  background-color:gainsboro;
+  margin-left:20%;
+  margin-right:20%;
+  padding:30px;
+  opacity: 0.9;
+}
+
+/* LOGIN */
+
+.login_form{
+  font-family: "Jost";
+  margin-left:20%;
+  margin-right:20%;
+  background-color:gainsboro;
+  padding: 50px;
+  /* text-align:center; */
+}
+
+.login_button, .signup_button{
+  width: 60%;
+  text-align:center;
+  align-items: center;
+  background-color: white;
+  color: black;
+  padding: 14px 20px;
+  margin-top: 30px;
+  margin-left: 20%;
+  margin-right: 20%;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.login_button:hover, .signup_button:hover, .login_form_button:hover, .signup_form_button:hover, .edit_button:hover, .new_button:hover, .logout_button:hover{
+  background-color: darkgray;
+  color: black;
+}
+
+.no_account, .has_account, .login_title, .signup_title{
+    text-align:center;
+}
+
+.signup_form_button, .login_form_button{
+  width: 30%;
+  text-align:center;
+  background-color: white;
+  color: black;
+  padding: 10px 10px;
+  margin: 6px 0;
+  margin-top:10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.signup_form{
+  font-family: "Jost";
+  margin-left:20%;
+  margin-right:20%;
+  background-color:gainsboro;
+  padding: 50px;
+  margin-bottom:20px;
+  /* text-align:center; */
+}
+
+.logout_button{
+  width: 100%;
+  text-align:center;
+  background-color: white;
+  color: black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family:'Lora';
+  font-size: 105%;
+  font-weight: 700;
+}
+
+/* TITLE */
+
+.load_title{
+  font-family: "Lora", italic;
+  font-weight: 500;
+  font-style: italic;
+  font-size:600%;
+  text-align: center;
+  margin-top:40px;
+}
+.load_summary{
+  font-family: "Lora";
+  text-align:center;
+  font-weight:600;
+}
+
+/* MOVIE SHOW */
+
+.movie_image {
+  max-width: 80%;
+  height: auto%;
+}
+
+.movie_info{
+  background-color:gainsboro;
+  padding-left: 10px;
+  margin-top: 10px;
+
+}
+.movie_container{
+  display:flex;
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-right:40px;
+  background-color:gainsboro;
+
+}
+
+.movie_reviews{ 
+  margin-top: 10px;
+  padding-right: 10px;
+  list-style-type: square;
+}
+
+.edit_button, .new_button{
+
+  width: 30%;
+  text-align:center;
+  background-color: white;
+  color: black;
+  padding: 10px 10px;
+  margin: 6px 0;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+
+.buttons{
+  text-align:center;
+}
+
+.popup{
+  position:fixed;
+  margin-top: 10%;
+  top: 0;
+  left: 0;
+  width: 70%;
+  height: 30%;
+  margin-left:15%;
+  margin-right:15%;
+  background-color:darkgray;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  text-align:center;
+}
+
+.popup_new_form{
+  position:relative;
+  padding: 32px;
+  width: 100%;
+  opacity:0.95;
+}
+
+.movie_show_container{
+  font-family:"Jost";
+  margin-bottom:30px;
+}
+
+.submit_edit_button, .delete_edit_button, .submit_new_button, .close_new_button{
+  width: 30%;
+  text-align:center;
+  background-color: white;
+  color: black;
+  padding: 10px 10px;
+  margin: 6px 6px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* ERROR */
+.error{
+  color: red;
+  font-weight:500;
+  font-style:bold;
+  text-align:center;
+}
+
+

@@ -5,38 +5,37 @@ import { UserContext } from "../App.js";
  
 function MyReviews(){
   const user = useContext(UserContext);
-  console.log(user)
-
   return (
     <div className="flex_container">
-      <div>
-        <h4>My Reviews:</h4>
+      <div className="my_reviews">
+        <h4 className="my_reviews_title">My Reviews:</h4>
       { 
         user.reviews.map((review)=> {
           return(
             <>
-              <ul>{review.comment}</ul>
+              <ul className="my_review_list">
+                <li>{review.comment}</li>
+              </ul>
               <ul>-{review.movie.title}</ul>         
             </>
           )
       })     }         
       </div>
-      <div>
-        <h4>Movies I've reviewed:</h4>
+      <div className="my_movies">
+        <h4 className="my_movies_title">Movies I've reviewed:</h4>
         {
           user.movies.map((movie)=> {
             return(
               <>
-                <ul>{movie.title}</ul>
+                <ul className="movie_list">
+                  <li>{movie.title}</li>
+                </ul>
               </>
             )
           })
         }
-
       </div>
-
     </div>
-
   )
 }
 

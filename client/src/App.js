@@ -17,7 +17,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [movies, setMovies]= useState('') 
 
-
+console.log(user)
 
   useEffect(() => {
     // auto-login
@@ -42,12 +42,9 @@ function App() {
 
 
   if (!user) return <Login setUser={setUser} />;
-
-
   return(
     <UserContext.Provider value={user}>
       <div className='home'>
-      <h1>CRITIQUER</h1>
           <>
           <NavBar setUser={setUser} />
           <Routes>

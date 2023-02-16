@@ -36,8 +36,8 @@ function PopupNewForm(props){
   //If the trigger is true, it will display the New Review Form. If it's false, it'll be an empty string.
   return((props.trigger)?(
     <div className="popup">
-      <h4>New Review Form</h4>
-      <form onSubmit={(e)=> handleSubmit(e)}>
+      <form className ="popup_new_form"onSubmit={(e)=> handleSubmit(e)}>
+      <h4>Add New Review</h4>
         <input
         type='text'
         value={newReview.comment}
@@ -45,7 +45,8 @@ function PopupNewForm(props){
           return{...prevState, comment: e.target.value, movie_id: parseInt(props.currentMovie.id), user_id: parseInt(props.user.id) }
         })}
         />
-        <button className="submit" type='submit' >Submit</button>
+        <button className="submit_new_button" type='submit' >Submit</button>
+        <button className="close_new_button" onClick={()=> props.setTrigger(!props.trigger)}>Close</button>
       </form>
     </div>
   ) : "")

@@ -13,12 +13,8 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found_respons
     render json: user, status: :ok
   end
 
-  # def index 
-  #   if params[:user_id]
-  #     user=User.find_by(id: params[:user_id])
-  #     render json: user, status: :ok
-  #   end
-  # end
+  
+
 
   private 
 

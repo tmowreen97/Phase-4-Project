@@ -59,7 +59,8 @@ function AddMovie({movies, setMovies}){
 
   return(
     <div className="add_movie">
-      <h1>Add a Movie!</h1>
+      <h2 className="add_movie_title">Add Movie</h2>
+      <div className="add_movie_form">
       <form onSubmit={(e)=> handleSubmit(e)}>
         <ul>
         <label>Title: </label>
@@ -131,13 +132,10 @@ function AddMovie({movies, setMovies}){
           step='.1'
           min="0" 
           max="10"
-          placeholder="Rating"
+          placeholder="Rating out of 10"
           onChange={(e)=> setNewMovieHash(prevState => {
             return {...prevState, rating: parseFloat(e.target.value)}})}
-          // onChange={(e)=> setNewMovieHash(prevState => {
-          //   return {...prevState, rating: (e.target.value).toFixed(1)}
-          // })}
-        /> /10
+        />
         </ul>
         <ul>
         <label>Runtime: </label>
@@ -145,20 +143,19 @@ function AddMovie({movies, setMovies}){
           type = 'number'
           value = {newMovieHash.runtime}
           min="0" 
-          placeholder="Runtime"
+          placeholder="Runtime in Minutes"
           onChange={(e)=> setNewMovieHash(prevState => {
             return {...prevState, runtime: parseFloat(e.target.value)}
           })}        
-        /> mins
+        />
         </ul>
         {errors && errors.map((err => (
-            <p key={err}>{err}</p>
+            <p className="error" key={err}>{err}</p>
           )))} 
-        <button>Submit Movie</button>
-   
+        <button className="submit_movie_button">Submit Movie</button>
       </form>
+      </div>
     </div>
-    
   )
 }
 

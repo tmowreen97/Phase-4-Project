@@ -77,7 +77,6 @@ function MovieShow(){
     .then(data => {
       setCurrentReviews(updatedReviews)
       setShowEditMode(!showEditMode)
-
     })
   }
 
@@ -89,24 +88,26 @@ function MovieShow(){
 
 
   return(
-    <div className="movieShow">
+    <div className="movie_show_container">
     {
       currentMovie && currentReviews &&
       <>
+      <div className="movie_container">
         <MovieInfo currentMovie={currentMovie}/>
-        <h5>Reviews:</h5>
         <MovieReviews currentReviews={currentReviews} user={user} showEditMode={showEditMode} handleSubmit={handleSubmit} handleDelete={handleDelete}/>
-        <PopupNewForm trigger={showNewReview} setTrigger={setShowNewReview} currentMovie={currentMovie} setCurrentReviews={setCurrentReviews} currentReviews={currentReviews} user={user} 
-        handleNewReview={handleNewReview}  />      
-        <button onClick={()=> handleClick()}>{showNewReview ? 'Close' : 'New Review'}</button>
-        <button onClick={()=> handleEditClick()}>{showEditMode ? 'Close' : 'Edit Mode'}</button>
+        </div>
+      <PopupNewForm trigger={showNewReview} setTrigger={setShowNewReview} currentMovie={currentMovie} setCurrentReviews={setCurrentReviews} currentReviews={currentReviews} user={user} 
+        handleNewReview={handleNewReview}  /> 
+      <div className="buttons">
+        <button className="new_button" onClick={()=> handleClick()}>New Review</button>
+        <button className="edit_button"onClick={()=> handleEditClick()}>{showEditMode ? 'Close' : 'Edit Mode'}</button>
+      </div>
+
+        
       </>
 
     }
     </div>
-
-    
-
   )
 }
 
@@ -127,13 +128,14 @@ function MovieInfo({currentMovie}){
 function MovieReviews({currentReviews, user,  showEditMode, handleSubmit, handleDelete}){
   return(
     <div className="movie_reviews">
+      <h4>Reviews:</h4>
       {currentReviews && currentReviews.map((review)=>{
         return(
-          <>
-            <p className="movie_comment">{review.comment} -@{review.user.username}</p>
+          <div className="movie_comments">
+            <li className="movie_comment">{review.comment}</li>
+            <ul>@{review.user.username}</ul>
             {user.username === review.user.username && showEditMode ? <PopupEdit review={review}  handleSubmit={handleSubmit}handleDelete={handleDelete}/> : ''}
-
-          </>
+          </div>
           
         )
       })}
@@ -144,9 +146,9 @@ function MovieReviews({currentReviews, user,  showEditMode, handleSubmit, handle
 function PopupEdit({review, handleSubmit, handleDelete}){
   const [edit, setEdit]=useState(review.comment)
   return(
-     <div>
+    <div >
     <form onSubmit={(e)=>handleSubmit(e, edit, review)}>
-    <label>Edit Review:</label>
+    <h5>Edit Review:</h5>
     <input
       value={edit}
       type="text"
@@ -154,9 +156,9 @@ function PopupEdit({review, handleSubmit, handleDelete}){
         setEdit(e.target.value)
       }}
     />
-    <button type='submit'>Submit</button>
+    <button className="submit_edit_button" type='submit'>Submit</button>
+    <button className="delete_edit_button"onClick={(e)=>{handleDelete(e, review)}}>Delete</button>
     </form>
-     <button onClick={(e)=>{handleDelete(e, review)}}>Delete</button>
      </div>
   )
 }

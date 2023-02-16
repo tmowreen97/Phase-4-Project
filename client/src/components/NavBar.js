@@ -11,8 +11,11 @@ function NavBar({ setUser }) {
   const user = useContext(UserContext);
 
   function handleLogoutClick() {
-    fetch("/logout", { method: "DELETE" }).then((r) => {
-      if (r.ok) {
+    fetch("/logout", {
+       method: "DELETE" 
+      })
+      .then((r) => {
+        if (r.ok) {
         setUser(null);
         navigate("/")
       }
@@ -23,22 +26,22 @@ function NavBar({ setUser }) {
     <div>
       <nav className="nav">
       <ul>
-        <CustomLink href="/home">Profile</CustomLink>
+        <CustomLink className="nav_text" href="/home">Profile</CustomLink>
       </ul>
       <ul>
-        <CustomLink href="/movies">Movies</CustomLink>
+        <CustomLink className="nav_text" href="/movies">Movies</CustomLink>
       </ul>
       <ul>
-      <CustomLink href='/reviews' user={user}>My Reviews</CustomLink>
+      <CustomLink className="nav_text" href='/reviews' user={user}>My Reviews</CustomLink>
       </ul>
       <ul>
-      <CustomLink href='/reviews/all' user={user}>All Reviews</CustomLink>
+      <CustomLink className="nav_text" href='/reviews/all' user={user}>All Reviews</CustomLink>
       </ul>
       <ul>
-      <CustomLink href='/movies/new' user={user}>New Movie</CustomLink>
+      <CustomLink className="nav_text" href='/movies/new' user={user}>New Movie</CustomLink>
       </ul>
       <ul>
-        <button variant="outline" onClick={handleLogoutClick}>
+        <button className="logout_button" onClick={handleLogoutClick}>
           Logout
         </button>
       </ul>
@@ -98,9 +101,6 @@ function ColorSchemesExample() {
     </>
   );
 }
-
-
-
 
 // const Nav = styled.nav`
 //   display: flex;
