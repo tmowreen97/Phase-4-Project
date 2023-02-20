@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import SignUpForm from "./SignupForm";
 import LoginForm from "./LoginForm";
-import {Redirect} from "react-router-dom"
 
 
 function Login({setUser}){
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
 
   const [showLogin, setShowLogin] = useState(true);
   console.log('showLogin', showLogin)

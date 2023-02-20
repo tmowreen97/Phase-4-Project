@@ -1,15 +1,14 @@
-import React, { useState, useNavigate } from 'react';
+import React, { useState } from 'react';
 import './Card.css';
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../App.js";
-import MovieShow from "./MovieShow.js"
+
 
 
 
 function MovieCards({movies}) {
   const user = useContext(UserContext);
-  // const navigate = useNavigate();
   const [currentReviews, setCurrentReviews] = useState('')
 
 
@@ -18,9 +17,9 @@ function MovieCards({movies}) {
       {movies && movies.map((movie)=> {
         // debugger
         return(
-          <div className='card'>
+          <div key={movie.id} className='card'>
           <div className='card_body'>
-            <img className='card_image' src={movie.image_url}/>
+            <img className='card_image' src={movie.image_url} alt='card_image'/>
             <h2 className='card_title'>{movie.title}</h2>
             <h4>{movie.rating.toFixed(1)} ⭐ | {movie.runtime} mins</h4>
             <p className='card_description'>{movie.description}</p>

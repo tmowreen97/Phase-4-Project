@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate} from "react-router-dom";
-import Profile from "./Profile";
 
 function SignUpForm({setUser}){
   const navigate = useNavigate()

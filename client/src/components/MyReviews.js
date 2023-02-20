@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import { useContext } from "react";
 import { UserContext } from "../App.js";
 
@@ -13,12 +12,12 @@ function MyReviews(){
       { 
         user.reviews.map((review)=> {
           return(
-            <>
+            <div key={review.id}>
               <ul className="my_review_list">
                 <li>{review.comment}</li>
               </ul>
               <ul>-{review.movie.title}</ul>         
-            </>
+            </div>
           )
       })     }         
       </div>
@@ -27,11 +26,11 @@ function MyReviews(){
         {
           user.movies.map((movie)=> {
             return(
-              <>
-                <ul className="movie_list">
+              <div key={movie.id}>
+                <ul key={movie.id} className="movie_list">
                   <li>{movie.title}</li>
                 </ul>
-              </>
+              </div>
             )
           })
         }

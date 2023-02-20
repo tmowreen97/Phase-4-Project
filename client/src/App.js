@@ -1,7 +1,7 @@
 import './App.css';
 import NavBar from './components/NavBar';
 import AddMovie from './components/AddMovie';
-import React, { useState, useEffect, useContext, createContext } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import MovieList from './components/MovieList';

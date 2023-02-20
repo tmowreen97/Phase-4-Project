@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
   resources :reviews
   resources :movies, only: [:index, :create, :show] do
+    # nested routes, this is for /movies/:movie_id/reviews
     resources :reviews, only: [:index]
   end
   post "/login", to: "sessions#create"

@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../App";
 //Rendered in MovieShow.js
 function PopupNewForm(props){
+  const user = useContext(UserContext)
+  console.log('should have context', user)
 
   //Use state to keep track of new review, in review format. 
   const [newReview, setNewReview]= useState({
@@ -42,7 +46,8 @@ function PopupNewForm(props){
         type='text'
         value={newReview.comment}
         onChange={(e)=> setNewReview(prevState => {
-          return{...prevState, comment: e.target.value, movie_id: parseInt(props.currentMovie.id), user_id: parseInt(props.user.id) }
+          // debugger
+          return{...prevState, comment: e.target.value, movie_id: parseInt(props.currentMovie.id), user_id: parseInt(user.id) }
         })}
         />
         <button className="submit_new_button" type='submit' >Submit</button>

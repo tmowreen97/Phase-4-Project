@@ -8,7 +8,7 @@ import { UserContext } from "../App.js";
 
 
 function MovieShow(){
-  const user = useContext(UserContext);
+  //current user value is stored in useContext(UserContext)
   //state values, keeps track of current movie on show page, and reviews attached to that movie.
   //showNewReview state toggles new review edit popup form
   const [currentMovie, setCurrentMovie]= useState(null)
@@ -47,7 +47,7 @@ function MovieShow(){
     e.preventDefault()
     const updatedReviews = currentReviews.filter((rev)=> {
       return(
-        rev.id != review.id
+        rev.id !== review.id
       )
     })
     fetch(`/reviews/${review.id}`, {
@@ -75,7 +75,7 @@ function MovieShow(){
     console.log(review)
     const updatedReviews = currentReviews.filter((rev)=> {
       return(
-        rev.id != review.id
+        rev.id !== review.id
       )
     })
     fetch(`/reviews/${review.id}`, {
@@ -102,16 +102,15 @@ function MovieShow(){
       <>
       <div className="movie_container">
         <MovieInfo currentMovie={currentMovie}/>
-        <MovieReviews currentReviews={currentReviews} user={user} showEditMode={showEditMode} handleSubmit={handleSubmit} handleDelete={handleDelete}/>
+        <MovieReviews currentReviews={currentReviews} showEditMode={showEditMode} handleSubmit={handleSubmit} handleDelete={handleDelete}/>
         </div>
-      <PopupNewForm trigger={showNewReview} setTrigger={setShowNewReview} currentMovie={currentMovie} setCurrentReviews={setCurrentReviews} currentReviews={currentReviews} user={user} 
+      <PopupNewForm trigger={showNewReview} setTrigger={setShowNewReview} currentMovie={currentMovie} setCurrentReviews={setCurrentReviews} currentReviews={currentReviews}
         handleNewReview={handleNewReview}  /> 
       <div className="buttons">
         <button className="new_button" onClick={()=> handleClick()}>New Review</button>
         <button className="edit_button"onClick={()=> handleEditClick()}>{showEditMode ? 'Close' : 'Edit Mode'}</button>
       </div>
 
-        
       </>
 
     }
@@ -124,7 +123,7 @@ export default MovieShow;
 function MovieInfo({currentMovie}){
   return(
     <div className="movie_info">
-      <img className='movie_image' src={currentMovie.image_url}/>
+      <img className='movie_image' src={currentMovie.image_url} alt='movie_image'/>
       <h2 className='movie_title'>{currentMovie.title}</h2>
       <h4>{currentMovie.rating.toFixed(1)} ⭐ | {currentMovie.runtime} mins</h4>
       <h5>Description</h5>
@@ -133,7 +132,9 @@ function MovieInfo({currentMovie}){
   )
 }
 
-function MovieReviews({currentReviews, user,  showEditMode, handleSubmit, handleDelete}){
+function MovieReviews({currentReviews,  showEditMode, handleSubmit, handleDelete}){
+  const user = useContext(UserContext)
+  console.log('should have context', user)
   return(
     <div className="movie_reviews">
       <h4>Reviews:</h4>

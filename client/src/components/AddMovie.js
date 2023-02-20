@@ -12,7 +12,6 @@ function AddMovie({movies, setMovies}){
     rating: '',
     runtime: ''
   })
-  const [rating, setRating] = useState('')
   const [errors, setErrors] = useState([])
   const navigate = useNavigate()
   console.log(newMovieHash)
