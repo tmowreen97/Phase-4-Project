@@ -9,7 +9,11 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found_respons
 
   def show
     movie = Movie.find_by(id: params[:id])
-    render json: movie, status: :ok
+    if movie
+      render json: movie, status: :ok
+    else
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
   def create
@@ -28,7 +32,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found_respons
   end
 
   def render_record_not_found_response
-    render json: {error: "Not found"}, status: :unauthorized
+    render json: {error: "Not found"}, status: :not_found
   end
 
 

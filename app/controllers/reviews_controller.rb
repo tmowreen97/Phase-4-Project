@@ -4,14 +4,23 @@ class ReviewsController < ApplicationController
 
   def update
     review = Review.find_by(id: params[:id])
-    review.update(review_params)
-    render json: review, status: :ok
+    if review
+      review.update!(review_params)
+      render json: review, status: :ok
+    else 
+      raise ActiveRecord::RecordNotFound
+    end
+    
   end
 
   def destroy
     review = Review.find_by(id: params[:id])
-    review.destroy
-    head :no_content
+    if review
+      review.destroy
+      head :no_content
+    else
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
   def create
@@ -20,15 +29,14 @@ class ReviewsController < ApplicationController
   end
 
   def index
-    reviews = Review.all
+    if params[:movie_id]
+      movie = Movie.find_by(id: params[:movie_id])
+      reviews = movie.reviews
+    else
+      reviews = Review.all
+    end
     render json: reviews, status: :ok
   end
-
-  # def show
-  #   reviews = Review.where(`user_id = #{session[:user_id]}`)
-  #   render json: reviews, status: :ok
-  # end
-
 
   private
 
@@ -41,6 +49,6 @@ class ReviewsController < ApplicationController
   end
 
   def render_record_not_found_response
-    render json: {error: "Not found"}, status: :unauthorized
+    render json: {error: "Not found"}, status: :not_found
   end
 end

@@ -5,6 +5,7 @@ import { UserContext } from "../App.js";
  
 function MyReviews(){
   const user = useContext(UserContext);
+  // debugger
   return (
     <div className="flex_container">
       <div className="my_reviews">

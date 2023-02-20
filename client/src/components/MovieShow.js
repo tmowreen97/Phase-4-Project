@@ -21,8 +21,16 @@ function MovieShow(){
     fetch(`${window.location.pathname}`)
     .then(resp=>resp.json())
     .then(current => {
+      // debugger
       setCurrentMovie(current)
-      setCurrentReviews(current.reviews)
+    })
+  },[])
+
+  useEffect(()=> {
+    fetch(`${window.location.pathname}/reviews`)
+    .then(resp=> resp.json())
+    .then(current=>{
+      setCurrentReviews(current)
     })
   },[])
 
@@ -131,7 +139,7 @@ function MovieReviews({currentReviews, user,  showEditMode, handleSubmit, handle
       <h4>Reviews:</h4>
       {currentReviews && currentReviews.map((review)=>{
         return(
-          <div className="movie_comments">
+          <div key={review.id} className="movie_comments">
             <li className="movie_comment">{review.comment}</li>
             <ul>@{review.user.username}</ul>
             {user.username === review.user.username && showEditMode ? <PopupEdit review={review}  handleSubmit={handleSubmit}handleDelete={handleDelete}/> : ''}

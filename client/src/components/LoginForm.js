@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Redirect, useHistory, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm({setUser}){
   //Here is the loginform, which will only come up if showLogIn is true. If showLogin is true, that means there is no user currently and the site wants you to login. We pass in setUser so that we can set the user to the inputed value, then hiding this form and sending you to the user profile.

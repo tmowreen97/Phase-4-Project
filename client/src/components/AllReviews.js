@@ -8,7 +8,6 @@ function AllReviews(){
     fetch('/reviews')
     .then(resp=> resp.json())
     .then(data => setAllReviews(data))
-    // debugger
   },[])
 
   return (

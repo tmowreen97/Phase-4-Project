@@ -1,8 +1,9 @@
 class Review < ApplicationRecord
-  validates :movie_id,numericality: { only_integer: true }
-  validates :user_id,numericality: { only_integer: true }
-  validates :movie_id,presence: true
-  validates :user_id,presence: true
+  # ensures movie_id/user_id is an int, makes sure movie_id, user_id, comment is all present
+  # defines relationship between movie and user
+  validates :movie_id,numericality: { only_integer: true }, presence: true
+  validates :user_id,numericality: { only_integer: true }, presence: true
+  validates :comment, presence:true
 
   belongs_to :movie
   belongs_to :user
