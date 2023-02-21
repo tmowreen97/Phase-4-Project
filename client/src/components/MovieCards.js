@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
-import './Card.css';
+import '../Card.css'
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../App.js";
-
-
 
 
 function MovieCards({movies}) {
   const user = useContext(UserContext);
   const [currentReviews, setCurrentReviews] = useState('')
 
-
+//renders movie cards
+//adds more details button to link to MovieShow path
   return (
     <div className="grid">
       {movies && movies.map((movie)=> {
-        // debugger
         return(
           <div key={movie.id} className='card'>
           <div className='card_body'>

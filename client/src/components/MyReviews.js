@@ -5,6 +5,7 @@ import { UserContext } from "../App.js";
 function MyReviews(){
   const user = useContext(UserContext);
   // debugger
+  //maps out reviews and movies that belong to user.
   return (
     <div className="flex_container">
       <div className="my_reviews">

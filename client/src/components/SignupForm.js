@@ -16,6 +16,8 @@ function SignUpForm({setUser}){
   //Set state for errors
   const [errors, setErrors] = useState([])
 
+  //sends POST request to "/signup" executed by users#create
+  //this creates a new user then sets the current user to this new user's data. submitting this will take you to the profile page. 
   function handleSubmit(e) {
     e.preventDefault();
     setErrors([]);
@@ -34,7 +36,7 @@ function SignUpForm({setUser}){
       if (r.ok) {
         r.json().then((user) => {
           setUser(user)
-          navigate("/home")
+          navigate("/profile")
           setUsername('')
           setPassword('')
           setPasswordConfirmation('')

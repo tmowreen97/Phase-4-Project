@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function AddMovie({movies, setMovies}){
   // ['Action', 'Comedy', 'Documentary','Drama','Horror', 'Musical', 'Romance','Thriller'] 
+  //form to add new movie to database
   const [newMovieHash, setNewMovieHash] = useState({
     title: '',
     year: '',
@@ -14,9 +15,9 @@ function AddMovie({movies, setMovies}){
   })
   const [errors, setErrors] = useState([])
   const navigate = useNavigate()
-  console.log(newMovieHash)
+  // console.log(newMovieHash)
 
-
+  //handles new movie. sends post request to /movies, to movies#create
   function handleSubmit(e){
     e.preventDefault();
     setErrors([]);
@@ -54,7 +55,7 @@ function AddMovie({movies, setMovies}){
       }
     })
   }
-  console.log('movies', newMovieHash)
+  // console.log('movies', newMovieHash)
 
   return(
     <div className="add_movie">

@@ -4,11 +4,9 @@ import LoginForm from "./LoginForm";
 
 
 function Login({setUser}){
-
+  //showLogin is set to true, because we want this to show unless theres a user in place. 
   const [showLogin, setShowLogin] = useState(true);
-  console.log('showLogin', showLogin)
-  console.log('onLogIn, which is equal to setUser', setUser)
-
+  // if showLogin is false, we show signup form instead.
   return (
     <div>
       <h1 className="load_title" >CRITIQUER</h1>
@@ -26,7 +24,6 @@ function Login({setUser}){
       ) : (
         <div className="signup_form">
           <SignUpForm setUser={setUser} />
-
           <p className="has_account">
             Already have an account? &nbsp;
             <button className="login_form_button" onClick={() => setShowLogin(true)}>

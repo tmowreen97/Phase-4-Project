@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 function AllReviews(){
 
   const [allReviews, setAllReviews]= useState(null)
-
+  //useEffect sends get request to /reviews to reviews#index to grab all reviews in database.
   useEffect(()=> {
     fetch('/reviews')
     .then(resp=> resp.json())

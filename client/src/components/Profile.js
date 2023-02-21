@@ -1,11 +1,9 @@
-// import ColorSchemesExample from "./NavBar";
-
-
 import { useContext } from "react";
 import { UserContext } from "../App.js";
 
 
 function Profile(){
+  //useContext user value
   const user = useContext(UserContext);
   return(
       <div className="profile">

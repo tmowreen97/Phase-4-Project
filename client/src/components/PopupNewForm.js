@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useContext } from "react";
 import { UserContext } from "../App";
+
 //Rendered in MovieShow.js
 function PopupNewForm(props){
   const user = useContext(UserContext)
   console.log('should have context', user)
+
 
   //Use state to keep track of new review, in review format. 
   const [newReview, setNewReview]= useState({
@@ -17,7 +19,7 @@ function PopupNewForm(props){
   function handleSubmit(e){
     e.preventDefault()
     console.log('new review',newReview)
-    console.log(props.currentReviews)
+    // console.log(currentReviews)
     fetch('/reviews', {
       method: "POST",
       headers: {

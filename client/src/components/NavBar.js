@@ -7,6 +7,7 @@ function NavBar({ setUser }) {
   const navigate = useNavigate()
   const user = useContext(UserContext);
 
+  //sends DELETE request to /logout executed by sessions#destroy, clearing the user. 
   function handleLogoutClick() {
     fetch("/logout", {
        method: "DELETE" 
@@ -23,7 +24,7 @@ function NavBar({ setUser }) {
     <div>
       <nav className="nav">
       <ul>
-        <CustomLink className="nav_text" href="/home">Profile</CustomLink>
+        <CustomLink className="nav_text" href="/profile">Profile</CustomLink>
       </ul>
       <ul>
         <CustomLink className="nav_text" href="/movies">Movies</CustomLink>

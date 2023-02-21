@@ -1,10 +1,12 @@
 //This is responsible for handling the #show action for Movies. This is rendered when the 'More Details' button is selected on a Movie Card on MovieCards.js
 
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import PopupNewForm from "./PopupNewForm";
 import { useContext } from "react";
 import { UserContext } from "../App.js";
 
+
+export const CurrentReviewContext = createContext()
 
 
 function MovieShow(){
@@ -16,16 +18,17 @@ function MovieShow(){
   const [showNewReview, setShowNewReview] = useState(false)
   const [showEditMode, setShowEditMode] = useState(false)
 
+// useEffect request to movies#show, returns info about specific movie.
   useEffect(()=>{
     console.log(`${window.location.pathname}`)
     fetch(`${window.location.pathname}`)
     .then(resp=>resp.json())
     .then(current => {
-      // debugger
       setCurrentMovie(current)
     })
   },[])
 
+  // useEffect request to reviews#index, returns all reviews belonging to a specific movie. Done through nested routes.
   useEffect(()=> {
     fetch(`${window.location.pathname}/reviews`)
     .then(resp=> resp.json())
@@ -39,10 +42,13 @@ function MovieShow(){
   function handleClick(){
     setShowNewReview(!showNewReview)
   }
-  function handleEditClick(review){
+
+  //when the 'Edit' button is clicked, toggles edit mode.
+  function handleEditClick(){
     setShowEditMode(!showEditMode)
   }
 
+  //handles edit review, sends patch request to reviews#update. triggered when PopupEdit form submitted
   function handleSubmit(e, edit, review){
     e.preventDefault()
     const updatedReviews = currentReviews.filter((rev)=> {
@@ -70,6 +76,7 @@ function MovieShow(){
 
   }
 
+  //handles delete review, sends delete request to reviews#destroy, when PopupEdit form delete button is pressed
   function handleDelete(e, review){
     e.preventDefault()
     console.log(review)
@@ -87,7 +94,7 @@ function MovieShow(){
       setShowEditMode(!showEditMode)
     })
   }
-
+  // handles new review, this is called in the PopupNewForm component, updates reviews state
   function handleNewReview(newReview){
     const updatedReviews = [...currentReviews]
     updatedReviews.unshift(newReview)
@@ -96,31 +103,36 @@ function MovieShow(){
 
 
   return(
-    <div className="movie_show_container">
-    {
-      currentMovie && currentReviews &&
-      <>
-      <div className="movie_container">
-        <MovieInfo currentMovie={currentMovie}/>
-        <MovieReviews currentReviews={currentReviews} showEditMode={showEditMode} handleSubmit={handleSubmit} handleDelete={handleDelete}/>
+    //useContext used to pass down currentReviews throughout this component
+    <CurrentReviewContext.Provider value={currentReviews}>
+      <div className="movie_show_container">
+      {
+        //as long as these values exist and are not null
+        //movie_container responsible for movie description, and movie's reviews listed on page.
+        //buttons responsible for 'New Review' and 'Edit Mode' buttons.
+        //when 'New Review' button is clicked, PopupNewForm is displayed
+        currentMovie && currentReviews &&
+        <>
+        <div className="movie_container">
+          <MovieInfo currentMovie={currentMovie}/>
+          <MovieReviews showEditMode={showEditMode} handleSubmit={handleSubmit} handleDelete={handleDelete}/>
         </div>
-      <PopupNewForm trigger={showNewReview} setTrigger={setShowNewReview} currentMovie={currentMovie} setCurrentReviews={setCurrentReviews} currentReviews={currentReviews}
-        handleNewReview={handleNewReview}  /> 
-      <div className="buttons">
-        <button className="new_button" onClick={()=> handleClick()}>New Review</button>
-        <button className="edit_button"onClick={()=> handleEditClick()}>{showEditMode ? 'Close' : 'Edit Mode'}</button>
+        <PopupNewForm trigger={showNewReview} setTrigger={setShowNewReview} currentMovie={currentMovie} handleNewReview={handleNewReview}  /> 
+        <div className="buttons">
+          <button className="new_button" onClick={()=> handleClick()}>New Review</button>
+          <button className="edit_button"onClick={()=> handleEditClick()}>{showEditMode ? 'Close' : 'Edit Mode'}</button>
+        </div>
+        </>
+      }
       </div>
-
-      </>
-
-    }
-    </div>
+    </CurrentReviewContext.Provider>
   )
 }
 
 export default MovieShow;
 
 function MovieInfo({currentMovie}){
+  //displays movie info
   return(
     <div className="movie_info">
       <img className='movie_image' src={currentMovie.image_url} alt='movie_image'/>
@@ -132,9 +144,11 @@ function MovieInfo({currentMovie}){
   )
 }
 
-function MovieReviews({currentReviews,  showEditMode, handleSubmit, handleDelete}){
+function MovieReviews({showEditMode, handleSubmit, handleDelete}){
+  //displays movie reviews.
+  //when the user presses the edit mode button, the popup edit form will come up for each review belonging to the user.
+  const currentReviews= useContext(CurrentReviewContext)
   const user = useContext(UserContext)
-  console.log('should have context', user)
   return(
     <div className="movie_reviews">
       <h4>Reviews:</h4>
@@ -145,7 +159,6 @@ function MovieReviews({currentReviews,  showEditMode, handleSubmit, handleDelete
             <ul>@{review.user.username}</ul>
             {user.username === review.user.username && showEditMode ? <PopupEdit review={review}  handleSubmit={handleSubmit}handleDelete={handleDelete}/> : ''}
           </div>
-          
         )
       })}
     </div>
@@ -153,6 +166,7 @@ function MovieReviews({currentReviews,  showEditMode, handleSubmit, handleDelete
 }
 
 function PopupEdit({review, handleSubmit, handleDelete}){
+  //edit state value allows the edit form to be prefilled with previous data
   const [edit, setEdit]=useState(review.comment)
   return(
     <div >

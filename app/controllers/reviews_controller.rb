@@ -2,6 +2,7 @@ class ReviewsController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :render_record_invalid_response
   rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found_response
 
+  
   def update
     review = Review.find_by(id: params[:id])
     if review
@@ -28,8 +29,10 @@ class ReviewsController < ApplicationController
     render json: review, status: :created
   end
 
+  
   def index
     if params[:movie_id]
+      # responsible for nested route, /movies/:movie_id/reviews
       movie = Movie.find_by(id: params[:movie_id])
       reviews = movie.reviews
     else
