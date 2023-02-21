@@ -4,33 +4,44 @@ import { createContext, useEffect, useState } from "react";
 import PopupNewForm from "./PopupNewForm";
 import { useContext } from "react";
 import { UserContext } from "../App.js";
+import { useParams } from "react-router-dom";
 
 
 export const CurrentReviewContext = createContext()
 
 
-function MovieShow(){
+function MovieShow({movies}){
   //current user value is stored in useContext(UserContext)
   //state values, keeps track of current movie on show page, and reviews attached to that movie.
   //showNewReview state toggles new review edit popup form
-  const [currentMovie, setCurrentMovie]= useState(null)
+  // const [currentMovie, setCurrentMovie]= useState(null)
   const [currentReviews, setCurrentReviews] = useState(null)
   const [showNewReview, setShowNewReview] = useState(false)
   const [showEditMode, setShowEditMode] = useState(false)
 
 // useEffect request to movies#show, returns info about specific movie.
-  useEffect(()=>{
-    console.log(`${window.location.pathname}`)
-    fetch(`${window.location.pathname}`)
-    .then(resp=>resp.json())
-    .then(current => {
-      setCurrentMovie(current)
-    })
-  },[])
+  // useEffect(()=>{
+  //   console.log(`${window.location.pathname}`)
+  //   fetch(`${window.location.pathname}`)
+  //   .then(resp=>resp.json())
+  //   .then(current => {
+  //     setCurrentMovie(current)
+  //   })
+  // },[])
+  
+  const {id} = useParams()
+  // console.log(id)
+  const currentMovie = movies.find((movie)=> {
+    return movie.id == id
+  })
+  console.log(currentMovie)
+ 
+
+
 
   // useEffect request to reviews#index, returns all reviews belonging to a specific movie. Done through nested routes.
   useEffect(()=> {
-    fetch(`${window.location.pathname}/reviews`)
+    fetch(`movies/${id}/reviews`)
     .then(resp=> resp.json())
     .then(current=>{
       setCurrentReviews(current)
