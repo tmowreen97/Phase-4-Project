@@ -1,6 +1,9 @@
 class MoviesController < ApplicationController
 rescue_from ActiveRecord::RecordInvalid, with: :render_record_invalid_response
 rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found_response
+skip_before_action :authorized, only: [:index]
+
+
 
   def index
     movies = Movie.all
