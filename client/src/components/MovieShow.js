@@ -10,12 +10,11 @@ import { useParams } from "react-router-dom";
 export const CurrentReviewContext = createContext()
 
 
-function MovieShow({movies}){
+function MovieShow({movies, reviews, setReviews, handleEditReview}){
   //current user value is stored in useContext(UserContext)
   //state values, keeps track of current movie on show page, and reviews attached to that movie.
   //showNewReview state toggles new review edit popup form
-  // const [currentMovie, setCurrentMovie]= useState(null)
-  const [currentReviews, setCurrentReviews] = useState(null)
+  const [currentReviews, setCurrentReviews] = useState([])
   const [showNewReview, setShowNewReview] = useState(false)
   const [showEditMode, setShowEditMode] = useState(false)
 
@@ -28,20 +27,17 @@ function MovieShow({movies}){
   //     setCurrentMovie(current)
   //   })
   // },[])
-  
-  const {id} = useParams()
-  // console.log(id)
+
+  const { id }= useParams()
+
   const currentMovie = movies.find((movie)=> {
     return movie.id == id
   })
-  console.log(currentMovie)
- 
-
-
 
   // useEffect request to reviews#index, returns all reviews belonging to a specific movie. Done through nested routes.
   useEffect(()=> {
-    fetch(`movies/${id}/reviews`)
+    // console.log('id', `${id}`)
+    fetch('/movies/'+id+'/reviews')
     .then(resp=> resp.json())
     .then(current=>{
       setCurrentReviews(current)
@@ -80,13 +76,11 @@ function MovieShow({movies}){
     })
     .then(resp=>resp.json())
     .then(data=> {
-      updatedReviews.unshift(data)
+      updatedReviews.push(data)
       setCurrentReviews(updatedReviews)
       setShowEditMode(!showEditMode)
     })
-
   }
-
   //handles delete review, sends delete request to reviews#destroy, when PopupEdit form delete button is pressed
   function handleDelete(e, review){
     e.preventDefault()
@@ -115,27 +109,28 @@ function MovieShow({movies}){
 
   return(
     //useContext used to pass down currentReviews throughout this component
-    <CurrentReviewContext.Provider value={currentReviews}>
-      <div className="movie_show_container">
-      {
-        //as long as these values exist and are not null
+            //as long as these values exist and are not null
         //movie_container responsible for movie description, and movie's reviews listed on page.
         //buttons responsible for 'New Review' and 'Edit Mode' buttons.
         //when 'New Review' button is clicked, PopupNewForm is displayed
-        currentMovie && currentReviews &&
-        <>
-        <div className="movie_container">
-          <MovieInfo currentMovie={currentMovie}/>
-          <MovieReviews showEditMode={showEditMode} handleSubmit={handleSubmit} handleDelete={handleDelete}/>
-        </div>
-        <PopupNewForm trigger={showNewReview} setTrigger={setShowNewReview} currentMovie={currentMovie} handleNewReview={handleNewReview}  /> 
-        <div className="buttons">
-          <button className="new_button" onClick={()=> handleClick()}>New Review</button>
-          <button className="edit_button"onClick={()=> handleEditClick()}>{showEditMode ? 'Close' : 'Edit Mode'}</button>
-        </div>
-        </>
+        
+    <CurrentReviewContext.Provider value={currentReviews}>
+      { currentReviews && currentMovie &&
+        <div className="movie_show_container">
+          <>
+          <div className="movie_container">
+            <MovieInfo currentMovie={currentMovie}/>
+            <MovieReviews showEditMode={showEditMode} handleSubmit={handleSubmit} handleDelete={handleDelete}/>
+          </div>
+          <PopupNewForm trigger={showNewReview} setTrigger={setShowNewReview} currentMovie={currentMovie} handleNewReview={handleNewReview}  /> 
+          <div className="buttons">
+            <button className="new_button" onClick={()=> handleClick()}>New Review</button>
+            <button className="edit_button"onClick={()=> handleEditClick()}>{showEditMode ? 'Close' : 'Edit Mode'}</button>
+          </div>
+          </>
+        </div>      
       }
-      </div>
+
     </CurrentReviewContext.Provider>
   )
 }
@@ -144,6 +139,7 @@ export default MovieShow;
 
 function MovieInfo({currentMovie}){
   //displays movie info
+  console.log('movie info',currentMovie)
   return(
     <div className="movie_info">
       <img className='movie_image' src={currentMovie.image_url} alt='movie_image'/>
@@ -164,11 +160,14 @@ function MovieReviews({showEditMode, handleSubmit, handleDelete}){
     <div className="movie_reviews">
       <h4>Reviews:</h4>
       {currentReviews && currentReviews.map((review)=>{
+        // debugger
         return(
           <div key={review.id} className="movie_comments">
             <li className="movie_comment">{review.comment}</li>
+            {console.log('in movie reviews',review)}
+            {console.log('username?', review.username)}
             <ul>@{review.user.username}</ul>
-            {user.username === review.user.username && showEditMode ? <PopupEdit review={review}  handleSubmit={handleSubmit}handleDelete={handleDelete}/> : ''}
+            {user.username === review.user.username && showEditMode ? <PopupEdit review={review}  handleSubmit={handleSubmit} handleDelete={handleDelete}/> : ''}
           </div>
         )
       })}

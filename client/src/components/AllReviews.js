@@ -1,25 +1,20 @@
 import { useEffect, useState } from "react";
 
-function AllReviews(){
+function AllReviews({reviews}){
 
-  const [allReviews, setAllReviews]= useState(null)
   //useEffect sends get request to /reviews to reviews#index to grab all reviews in database.
-  useEffect(()=> {
-    fetch('/reviews')
-    .then(resp=> resp.json())
-    .then(data => setAllReviews(data))
-  },[])
 
   return (
     <div className="all_reviews">
     <h2 className="all_reviews_title">All Reviews</h2>
     <div className="review_list">
 {
-  allReviews &&  allReviews.map((review)=> {
+  reviews &&  reviews.map((review)=> {
+    // debugger
     return(
       <>
         <li>{review.comment}</li>
-        <ul>-{review.movie.title}, @{review.user.username}</ul>
+        <ul>-{review.title}, @{review.username}</ul>
       </>
     )
   } )
