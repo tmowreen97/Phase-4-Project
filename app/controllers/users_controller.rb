@@ -6,8 +6,12 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found_respons
   #/signup
   def create
     user = User.create!(user_params)
-    session[:user_id]||= user.id
-    render json: user, status: :created
+    if user.valid?
+      session[:user_id]||= user.id
+      render json: user, status: :created
+    else 
+      raise ActiveRecord::RecordInvalid
+    end
   end
 
   #/me
