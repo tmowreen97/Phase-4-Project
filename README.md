@@ -15,7 +15,7 @@ Thank you for checking out Critiquer!
 
 ## Setup
 
-Start by **cloning** this repository in your terminal, and opening the programe in your code editor. 
+Start by **cloning** this repository in your terminal, and opening the program in your code editor. Ensure you're in the Phase-4-Project directory by typing cd Phase-4-Project.
 
 For the backend:
 Make sure to run *bundle install* to install all the dependencies. \
