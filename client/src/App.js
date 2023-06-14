@@ -41,8 +41,11 @@ function App() {
       const movies_array=[]
       const reviews_array=[]
       data.map((movie)=> {
-        movies_array.push(movie)
-        reviews_array.push(movie.reviews)
+        return(
+          movies_array.push(movie),
+          reviews_array.push(movie.reviews)
+        )
+        
       })
       setMovies(movies_array)
       setReviews(reviews_array.flat())

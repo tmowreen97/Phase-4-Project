@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-skip_before_action :authorized, only: [:create]
+# skip_before_action :authorized, only: [:create]
 rescue_from ActiveRecord::RecordInvalid, with: :render_record_invalid_response
 rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found_response
 
@@ -24,6 +24,10 @@ rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found_respons
     end
   end
 
+  def most_reviews
+    user = User.most_reviews
+    render json: user
+  end
 
   private 
 

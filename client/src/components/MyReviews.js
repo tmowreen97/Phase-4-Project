@@ -10,7 +10,8 @@ function MyReviews(){
     <div className="flex_container">
       <div className="my_reviews">
         <h4 className="my_reviews_title">My Reviews:</h4>
-      { 
+      {user.reviews.length===0 ? <ul><em>No reviews yet!</em></ul> : 
+      <>{ 
         user.reviews.map((review)=> {
           return(
             <div key={review.id}>
@@ -20,10 +21,12 @@ function MyReviews(){
               <ul>-{review.movie.title}</ul>         
             </div>
           )
-      })     }         
+      })     }</>}         
       </div>
       <div className="my_movies">
-        <h4 className="my_movies_title">Movies I've reviewed:</h4>
+        <h4 className="my_movies_title">Movies I've Reviewed:</h4>
+        {user.movies.length===0 ? <ul><em>No movies reviewed yet!</em></ul> : 
+        <>
         {
           user.movies.map((movie)=> {
             return(
@@ -35,6 +38,8 @@ function MyReviews(){
             )
           })
         }
+        </>}
+        
       </div>
     </div>
   )

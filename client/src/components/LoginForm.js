@@ -42,17 +42,19 @@ function LoginForm({setUser}){
 
   // debugger
   return (
-    <div>
+    <div className="login_box">
       <h2 className="login_title">Login</h2>
      <form onSubmit={handleSubmit}>
         <label>Username: </label>
         <input
+        className="login_input"
         type='text'
         value={username}
         onChange={(e)=>setUsername(e.target.value)}
         />
         <label>Password: </label>
         <input
+        className="login_input"
         type='password'
         value={password}
         onChange={(e)=>setPassword(e.target.value)}

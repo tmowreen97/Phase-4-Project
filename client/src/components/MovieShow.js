@@ -31,7 +31,7 @@ function MovieShow({movies, reviews, setReviews, handleEditReview}){
   const { id }= useParams()
 
   const currentMovie = movies.find((movie)=> {
-    return movie.id == id
+    return movie.id === parseInt(id)
   })
 
   // useEffect request to reviews#index, returns all reviews belonging to a specific movie. Done through nested routes.
@@ -42,7 +42,7 @@ function MovieShow({movies, reviews, setReviews, handleEditReview}){
     .then(current=>{
       setCurrentReviews(current)
     })
-  },[])
+  },[id])
 
 
   //when the 'New Review' button is clicked, showNewReview is switched to true and the popup form displays.
@@ -118,7 +118,7 @@ function MovieShow({movies, reviews, setReviews, handleEditReview}){
       { currentReviews && currentMovie &&
         <div className="movie_show_container">
           <>
-          <div className="movie_container">
+          <div className="grid_container">
             <MovieInfo currentMovie={currentMovie}/>
             <MovieReviews showEditMode={showEditMode} handleSubmit={handleSubmit} handleDelete={handleDelete}/>
           </div>
@@ -141,12 +141,17 @@ function MovieInfo({currentMovie}){
   //displays movie info
   console.log('movie info',currentMovie)
   return(
-    <div className="movie_info">
-      <img className='movie_image' src={currentMovie.image_url} alt='movie_image'/>
-      <h2 className='movie_title'>{currentMovie.title}</h2>
-      <h4>{currentMovie.rating.toFixed(1)} ⭐ | {currentMovie.runtime} mins</h4>
-      <h5>Description</h5>
-      <p className='card_description'>{currentMovie.description}</p>
+    <div className="grid-child">
+      <div className="movie_info_section">
+        <img className='movie_image' src={currentMovie.image_url} alt='movie_image'/>
+        <div className="movie_info">
+          <h1 className='movie_title'>{currentMovie.title}</h1>
+          <h4>{currentMovie.rating.toFixed(1)} ⭐ | {currentMovie.runtime} mins</h4>
+          <h5>Description</h5>
+          <p className='movie_description'>{currentMovie.description}</p>
+        </div>
+        
+      </div>
     </div>
   )
 }
@@ -157,20 +162,21 @@ function MovieReviews({showEditMode, handleSubmit, handleDelete}){
   const currentReviews= useContext(CurrentReviewContext)
   const user = useContext(UserContext)
   return(
-    <div className="movie_reviews">
-      <h4>Reviews:</h4>
-      {currentReviews && currentReviews.map((review)=>{
-        // debugger
-        return(
-          <div key={review.id} className="movie_comments">
-            <li className="movie_comment">{review.comment}</li>
-            {console.log('in movie reviews',review)}
-            {console.log('username?', review.username)}
-            <ul>@{review.user.username}</ul>
-            {user.username === review.user.username && showEditMode ? <PopupEdit review={review}  handleSubmit={handleSubmit} handleDelete={handleDelete}/> : ''}
-          </div>
+    <div className="grid-child">
+      <div className="movie_reviews">
+        <h3>Reviews:</h3>
+        {currentReviews && currentReviews.map((review)=>{
+          // debugger
+          return(
+            <div key={review.id} className="movie_comments">
+              <li className="movie_comment">{review.comment}</li>
+              <p>- @{review.user.username}</p>
+              {user.username === review.user.username && showEditMode ? <PopupEdit review={review}  handleSubmit={handleSubmit} handleDelete={handleDelete}/> : ''}
+            </div>
         )
       })}
+      </div>
+      
     </div>
   )
 }

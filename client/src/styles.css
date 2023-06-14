@@ -46,6 +46,7 @@
   font-weight: 500;
   font-style: italic;
   font-size:700%;
+  margin-top: 40px;
 }
 
 .profile{
@@ -185,11 +186,17 @@ input[type=text], input[type=password], input[type=number], select {
 
 .login_form{
   font-family: "Jost";
+  margin-top: 70px;
   margin-left:20%;
   margin-right:20%;
   background-color:gainsboro;
   padding: 50px;
   /* text-align:center; */
+}
+
+.login_box{
+  margin-right:100px;
+  margin-left: 100px;
 }
 
 .login_button, .signup_button{
@@ -263,7 +270,7 @@ input[type=text], input[type=password], input[type=number], select {
   font-style: italic;
   font-size:600%;
   text-align: center;
-  margin-top:40px;
+  margin-top:80px;
 }
 .load_summary{
   font-family: "Lora";
@@ -273,32 +280,41 @@ input[type=text], input[type=password], input[type=number], select {
 
 /* MOVIE SHOW */
 
+.grid_container{
+  display:grid;
+  grid-template-columns: 1.25fr 1fr;
+  grid-gap: 10px;
+  margin:40px;
+  background-color:gainsboro;
+}
 .movie_image {
-  max-width: 80%;
-  height: auto%;
+  max-width: 90%; 
 }
 
+.movie_description{
+  margin-right: 18%;
+}
+
+/* div surrounding movie-show info */
+.movie_info_section{
+  padding: 40px;
+  padding-left: 60px;
+}
+/* movie written description (without image) */
 .movie_info{
-  background-color:gainsboro;
-  padding-left: 10px;
-  margin-top: 10px;
-
-}
-.movie_container{
-  display:flex;
-  margin-top: 40px;
-  margin-left: 40px;
-  margin-right:40px;
-  background-color:gainsboro;
-
+  margin: 20px;
 }
 
 .movie_reviews{ 
-  margin-top: 10px;
-  padding-right: 10px;
+  padding: 40px;
   list-style-type: square;
 }
 
+.movie_comments{
+  margin-right: 40px;
+  margin-left: 20px;
+
+}
 .edit_button, .new_button{
 
   width: 30%;
